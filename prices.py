@@ -33,19 +33,22 @@ try:
         print("  {\"" + name + "\",{\n")
 
         for from_symbol in exchanges[name]:
-            print("    {\"" + from_symbol + "\", {", end=" ")
 
-            for to_symbol in exchanges[name][from_symbol]:
-                print("{\"" + to_symbol + "\", 0.0},", end=" ")
+            if from_symbol == "BTC":
+                print("    {\"" + from_symbol + "\", {", end=" ")
 
-            print(" },},")
+                for to_symbol in exchanges[name][from_symbol]:
+                    print("{\"" + to_symbol + "\", 0.0},", end=" ")
 
-        print("  },")
-        print("  },")
-
-        iteration = iteration + 1
-        if iteration > 10:
+                print(" },},")
             break
+
+        print("  },")
+        print("  },")
+
+        # iteration = iteration + 1
+        # if iteration > 10:
+        #     break
 
     # Footer
     print("};\n")

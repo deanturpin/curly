@@ -8,5 +8,6 @@ int main() {
 
   std::cout << exchanges.size() << " exchanges\n";
   for (const auto &e : exchanges)
-    std::cout << e.name << " - " << e.symbols.size() << '\n';
+    if (!e.symbols.empty())
+      std::cout << e.name << " - " << e.symbols.size() << '\n';
 }
