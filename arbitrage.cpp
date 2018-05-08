@@ -6,5 +6,7 @@
 
 int main() {
 
-  std::cout << prices.size() << " exchanges\n";
+  std::cout << exchanges.size() << " exchanges\n";
+  for (const auto &e : exchanges)
+    std::cout << e.name << " - " << e.symbols.size() << '\n';
 }

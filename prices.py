@@ -16,19 +16,21 @@ try:
         "#ifndef PRICES_H\n" +
         "#define PRICES_H\n" +
         "struct exchange {\n" +
-        "std::string name;\n" +
-        "struct {\n" +
-            "std::string name;\n" +
-            "std::vector<std::pair<std::string, double>> to_symbols;\n" +
-        "} from_symbol;\n" +
-        "};\n\n" +
-        "const std::vector<exchange> prices {"
+        "  struct from_symbol{\n" +
+        "    std::string name;\n" +
+        "    std::vector<std::pair<std::string, double>> to_symbols;\n" +
+        "  };\n" +
+        "  std::string name;\n" +
+        "  std::vector<from_symbol> symbols;\n" +
+        "};\n" +
+        "\n" +
+        "const std::vector<exchange> exchanges {"
         )
 
     # Print all currency pairs
     iteration = 0
     for name in exchanges:
-        print("  {\"" + name + "\",")
+        print("  {\"" + name + "\",{\n")
 
         for from_symbol in exchanges[name]:
             print("    {\"" + from_symbol + "\", {", end=" ")
@@ -36,14 +38,14 @@ try:
             for to_symbol in exchanges[name][from_symbol]:
                 print("{\"" + to_symbol + "\", 0.0},", end=" ")
 
-            print(" },}")
-
-            iteration += 1
-            if iteration > 5:
-                break
+            print(" },},")
 
         print("  },")
+        print("  },")
 
+        iteration = iteration + 1
+        if iteration > 10:
+            break
 
     # Footer
     print("};\n")
