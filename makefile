@@ -1,16 +1,24 @@
-all: exchanges.o markets.csv
+all: tmp tmp/exchanges.o tmp/markets.csv
 
-%.csv: %.py
+# Make working directory
+tmp:
+	mkdir -p $@
+
+tmp/%.csv: bin/%.py
 	./$< > $@
 
 CXX=clang++
 flags=-g -Werror -Wall -Wextra -pedantic -std=gnu++14
 
-%.o: %.cpp
+tmp/%.o: %.cpp
 	$(CXX) $(flags) -o $@ $<
 
+markets: all
+	tmp/exchanges.o
+
+# All transient files written to tmp
 clean:
-	rm -f *.o
+	rm -rf tmp
 
 update: clean
 	make

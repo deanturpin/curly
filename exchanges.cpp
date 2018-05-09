@@ -7,7 +7,7 @@
 
 int main() {
 
-  std::ifstream in("exchanges.csv");
+  std::ifstream in("tmp/markets.csv");
 
   struct exchange {
     std::string name;

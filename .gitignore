@@ -1,5 +1,2 @@
 *.swp
-*.o
-prices.h
-pairs.csv
-exchanges.csv
+tmp/*
