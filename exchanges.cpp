@@ -1,7 +1,7 @@
+#include <algorithm>
 #include <fstream>
 #include <iostream>
 #include <sstream>
-#include <algorithm>
 #include <string>
 #include <vector>
 
@@ -11,9 +11,7 @@ int main() {
 
   struct exchange {
     std::string name;
-    std::vector<
-      std::vector<std::string>
-      > markets;
+    std::vector<std::vector<std::string>> markets;
   };
 
   std::vector<exchange> exchanges;
@@ -32,9 +30,7 @@ int main() {
 
     // Check if we already have an entry for this exchange
     auto it = std::find_if(exchanges.begin(), exchanges.end(),
-                                 [&name](const auto &m){
-                                  return m.name == name;
-                                 });
+                           [&name](const auto &m) { return m.name == name; });
 
     // Not market then create a new one and insert it
     if (it == exchanges.end()) {
@@ -51,12 +47,13 @@ int main() {
   }
 
   // Sort exchanges by number of markets offered
-  std::sort(exchanges.begin(), exchanges.end(), [](const auto &lhs, const auto &rhs){
-            return lhs.markets.size() < rhs.markets.size();
+  std::sort(exchanges.begin(), exchanges.end(),
+            [](const auto &lhs, const auto &rhs) {
+              return lhs.markets.size() < rhs.markets.size();
             });
 
   // Report exchange summary
   std::cout << exchanges.size() << " exchanges\n";
-  for (const auto &e: exchanges)
+  for (const auto &e : exchanges)
     std::cout << e.name << ' ' << e.markets.size() << '\n';
 }
