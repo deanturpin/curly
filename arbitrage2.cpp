@@ -1,18 +1,15 @@
-#include <string>
-#include <map>
-#include <vector>
-#include <iostream>
 #include <fstream>
+#include <iostream>
+#include <map>
 #include <sstream>
+#include <string>
+#include <vector>
 
 int main() {
 
   std::ifstream in("pairs.csv");
 
-  using currency_pairs = std::map < 
-    std::string,
-    std::vector<std::string>
-  >;
+  using currency_pairs = std::map<std::string, std::vector<std::string>>;
 
   currency_pairs pairs;
 

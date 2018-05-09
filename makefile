@@ -1,4 +1,4 @@
-all: prices.h arbitrage
+all: prices.h arbitrage2.o
 
 %.h: %.py
 	./$< > $@
@@ -11,10 +11,11 @@ flags=-g -Werror -Wall -Wextra -pedantic -std=gnu++14
 %.o: %.cpp
 	$(CXX) $(flags) -o $@ $<
 
-arbitrage: arbitrage.o prices.h
-	./$<
 clean:
 	rm -f prices.h *.o
 
 update: clean
 	make
+
+format:
+	clang-format -i *.cpp
