@@ -29,18 +29,22 @@ try:
 
     # Print all currency pairs
     for name in exchanges:
+
+        if name == "EtherDelta":
+            continue
+
         print("  {\"" + name + "\",{\n")
 
         for from_symbol in exchanges[name]:
 
-            if from_symbol == "BTC":
-                print("    {\"" + from_symbol + "\", {", end=" ")
+        # if from_symbol == "BTC":
+            print("    {\"" + from_symbol + "\", {", end=" ")
 
-                for to_symbol in exchanges[name][from_symbol]:
-                    print("{\"" + to_symbol + "\", 0.0},", end=" ")
+            for to_symbol in exchanges[name][from_symbol]:
+                print("{\"" + to_symbol + "\", 0.0},", end=" ")
 
-                print(" },},")
-                break
+            print(" },},")
+            # break
 
         print("  },")
         print("  },")
