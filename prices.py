@@ -28,7 +28,6 @@ try:
         )
 
     # Print all currency pairs
-    iteration = 0
     for name in exchanges:
         print("  {\"" + name + "\",{\n")
 
@@ -41,14 +40,10 @@ try:
                     print("{\"" + to_symbol + "\", 0.0},", end=" ")
 
                 print(" },},")
-            break
+                break
 
         print("  },")
         print("  },")
-
-        # iteration = iteration + 1
-        # if iteration > 10:
-        #     break
 
     # Footer
     print("};\n")
