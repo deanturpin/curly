@@ -7,8 +7,7 @@
 
 int main() {
 
-  std::ifstream in("tmp/markets.csv");
-
+  // An exchange has a name and a number of markets
   struct exchange {
     std::string name;
     std::vector<std::vector<std::string>> markets;
@@ -17,6 +16,7 @@ int main() {
   std::vector<exchange> exchanges;
 
   std::string line;
+  std::ifstream in("tmp/markets.csv");
   while (getline(in, line)) {
 
     std::stringstream ss(line);
@@ -42,7 +42,7 @@ int main() {
       it = std::prev(exchanges.end());
     }
 
-    // Update existing element or the last one created
+    // Update existing exchange or the one we've just created
     it->markets.push_back(symbols);
   }
 
@@ -52,8 +52,13 @@ int main() {
               return lhs.markets.size() < rhs.markets.size();
             });
 
-  // Report exchange summary
+  // Report exchange summar
+  const std::string from = "ETH";
+  const std::string to = "USD";
   std::cout << exchanges.size() << " exchanges\n";
   for (const auto &e : exchanges)
-    std::cout << e.name << ' ' << e.markets.size() << '\n';
+    for (const auto &m : e.markets)
+      if (m.front() == from)
+        if (find(m.cbegin(), m.cend(), to) != m.cend())
+          std::cout << e.name << ' ' << from << ' ' << to << '\n';
 }
