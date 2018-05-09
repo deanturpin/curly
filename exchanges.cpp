@@ -32,7 +32,7 @@ int main() {
     auto it = std::find_if(exchanges.begin(), exchanges.end(),
                            [&name](const auto &m) { return m.name == name; });
 
-    // Not market then create a new one and insert it
+    // If there's no exchange then create a new one and insert it
     if (it == exchanges.end()) {
 
       // Append an empty exchange
@@ -42,7 +42,7 @@ int main() {
       it = std::prev(exchanges.end());
     }
 
-    // Update existing or new entry
+    // Update existing element or the last one created
     it->markets.push_back(symbols);
   }
 
