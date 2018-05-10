@@ -7,5 +7,4 @@ install:
 
 language: c++
 
-script:
-  - make source
+script: make CXX=g++-6 source
