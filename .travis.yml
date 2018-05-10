@@ -1,15 +1,11 @@
 before_install:
   - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-  - sudo add-apt-repository -y ppa:llvm-toolchain-trusty-4.0
   - sudo apt-get update
 
 install:
   - sudo apt-get -y install g++-6
-  - sudo apt-get -y install clang-4.0
 
 language: c++
 
 script:
   - make source
-  - make clean
-  - make CXX=clang++-4.0 source
