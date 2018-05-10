@@ -14,7 +14,7 @@ objects = $(patsubst %.cpp, tmp/%.o, $(wildcard *.cpp))
 source: tmp
 	make --jobs $(JOBS) $(objects)
 
-CXX=clang++
+CXX=g++
 flags=-g -Werror -Wall -Wextra -pedantic -std=gnu++14
 
 tmp/%.o: %.cpp
