@@ -2,12 +2,13 @@
 #define CURL_H
 
 #include <sstream>
+#include <string>
 #include <fstream>
 
 std::string curl(const std::string url) {
 
   // Construct the full command with redirects to stdout and stderr
-  const std::string command = "curl \'" + url + "\'";
+  const std::string command = "/usr/bin/curl \'" + url + "\'";
   const std::string stdout_file = "tmp/stdout.txt";
   const std::string stderr_file = " 2> tmp/stderr.txt 1> ";
   const std::string complete = command + stderr_file + stdout_file;
