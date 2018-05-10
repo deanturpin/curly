@@ -1,4 +1,4 @@
-all: tmp tmp/exchanges.o tmp/markets.csv
+all: tmp source tmp/markets.csv
 
 # Make working directory, all transient files are written here clean is easy
 tmp:
