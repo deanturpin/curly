@@ -7,3 +7,5 @@ install:
 
 language: c++
 script: make source
+script: make clean
+script: make CXX=clang++-4.0 source
