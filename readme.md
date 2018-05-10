@@ -1,3 +1,6 @@
+[![Build
+Status](https://travis-ci.org/deanturpin/arbitrage.svg?branch=master)](https://travis-ci.org/deanturpin/arbitrage)
+
 All prices are fetched via the [CryptoCompare
 API](https://min-api.cryptocompare.com/).
 
