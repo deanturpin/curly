@@ -9,6 +9,9 @@ API](https://min-api.cryptocompare.com/).
 make update markets 
 ```
 
+Written to avoid having to do the network bits in Python. Could be done with
+```popen``` but it's quite useful to log all the messages.
+
 # References
 * https://en.wikipedia.org/wiki/Arbitrage
 * https://en.wikipedia.org/wiki/Law_of_one_price
