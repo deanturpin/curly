@@ -6,20 +6,22 @@
 
 std::string curl(const std::string url) {
 
+  // Construct the full command with redirects to stdout and stderr
   const std::string command = "curl \'" + url + "\'";
-  const std::string file = "/tmp/stdout.txt";
-  const std::string pipe = " 2> /tmp/stderr.txt 1> ";
-  const std::string complete_command = command + pipe + file;
+  const std::string stdout_file = "tmp/stdout.txt";
+  const std::string stderr_file = " 2> tmp/stderr.txt 1> ";
+  const std::string complete = command + stderr_file + stdout_file;
 
   // Attempt to run command
-  system(complete_command.c_str());
+  system(complete.c_str());
 
-  // Read the result
+  // Read the result from stdout
   std::stringstream ss;
-  std::ifstream in(file);
+  std::ifstream in(stdout_file);
   if (in.good())
     ss << in.rdbuf();
 
+  // Return the response or an empty string if there wasn't one
   return ss.str();
 }
 
