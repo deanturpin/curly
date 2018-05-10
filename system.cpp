@@ -5,20 +5,22 @@
 
 int main() {
 
-  const std::string command = "ls rah";
-  const std::string file = "/tmp/arbitrage.txt";
-  const std::string pipe = " 2>/dev/null > ";
+  const std::string command =
+    "curl 'https://min-api.cryptocompare.com/data/all/exchanges"
+    "?extraParams=https://github.com/deanturpin/arbitrage'";
+
+  const std::string file = "/tmp/stdout.txt";
+  const std::string pipe = " 2> /tmp/stderr.txt 1> ";
   const std::string complete_command = command + pipe + file;
 
+  // Attempt to run command
   std::stringstream ss("empty");
+  system(complete_command.c_str());
 
-  // Attempt to run command and read the result
-  if (system((command + pipe + file).c_str()) != 0) {
-    std::ifstream in(file);
+  // Read the result
+  std::ifstream in(file);
+  if (in.good())
     ss << in.rdbuf();
-  }
 
-  std::cout << ss.str();
-
-  // FILE *popen(const char *command, const char *type);
+  std::cout << ss.str() << '\n';
 }
