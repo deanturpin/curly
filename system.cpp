@@ -1,6 +1,6 @@
 #include "curl.h"
+
 #include <iostream>
-#include <regex>
 
 int main() {
 
@@ -14,12 +14,12 @@ int main() {
   // Request some prices and print the response
   const std::string response = cc("data/price?fsym=BTC&tsyms=USD,JPY,EUR,ETH");
 
-  std::cout << "response: " << response << '\n';
+  std::cout << "Raw response\n" << response << '\n';
 
-  std::cout << "comma split\n";
-  std::regex tokens(R"([{},:"]+)");
-  std::copy(std::sregex_token_iterator(response.begin(), response.end(),
-                                       tokens, -1),
-            std::sregex_token_iterator(),
-            std::ostream_iterator<std::string>(std::cout, "\n"));
+  const auto tokens = tiny::json(response);
+
+  // Print tokens
+  std::cout << "\nTokens\n";
+  for (const auto &t : tokens)
+    std::cout << t.first << " : " << t.second << '\n';
 }

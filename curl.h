@@ -6,16 +6,18 @@
 #include <map>
 #include <fstream>
 #include <algorithm>
+#include <iterator>
+#include <regex>
 
 namespace tiny {
 
-std::string curl(const std::string url) {
+auto curl(const std::string url) {
 
   // Known errors
   const std::map<unsigned int, std::string> errors {
   {0, "ok"},
-  {1536, "no network"},
-  {32512, "path to curl incorrect"},
+  {1536, "no-network"},
+  {32512, "path-to-curl-incorrect"},
   };
 
   // Construct the command with redirects to stdout and stderr
@@ -37,6 +39,36 @@ std::string curl(const std::string url) {
 
   // Return the response (or error)
   return ss.str();
+}
+
+// Parse JSON string and return map of tokens
+auto json(const std::string s) noexcept {
+
+  // Return a map of string/strings
+  std::map<std::string, std::string> json_map;
+
+  try {
+
+    // Token delimiters
+    std::regex r(R"([ ,:'"\{\}]+)");
+
+    // Iterate over the tokens and push them onto a container
+    std::vector<std::string> tokens;
+    std::copy(std::sregex_token_iterator(s.begin(), s.end(), r, -1),
+              std::sregex_token_iterator(), std::back_inserter(tokens));
+
+    // Create map, stripping empty tokens
+    for (unsigned long i = 0; i < tokens.size(); ++i)
+      if (tokens[i] != "") {
+        json_map[tokens[i]] = tokens[i + 1];
+        ++i;
+      }
+
+  } catch (std::regex_error e) {
+    // Quietly discard exceptions
+  }
+
+  return json_map;
 }
 
 }
