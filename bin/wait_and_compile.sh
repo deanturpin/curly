@@ -6,7 +6,7 @@ readonly source_file=$1
 echo Wait for $source_file
 
 base=${source_file%.*}
-cc=g++
+cc=clang++-4.0
 
 echo Using standard ${std:-c++14}
 
