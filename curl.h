@@ -15,14 +15,14 @@ std::string curl(const std::string url) {
     "/usr/bin/curl \'" + url + "\' 2> /tmp/stderr.txt 1> " + file;
 
   // Attempt to run command
-  system(command.c_str());
+  const auto error = system(command.c_str());
 
   // Read the response written to the stdout file
-  std::stringstream ss("curl failed");
-  ss << std::ifstream(file).rdbuf() << '\n';
+  std::stringstream ss("{\"error\" : \"" + std::to_string(error) + "\"}");
+  ss << std::ifstream(file).rdbuf();
 
-  // Return the response or an empty string if there wasn't one
-  return ss.str();
+  // Return the response (or error)
+  return ss.str() + '\n';
 }
 
 }
