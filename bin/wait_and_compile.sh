@@ -12,7 +12,7 @@ echo Using standard ${std:-c++14}
 
 while :; do
 
-  inotifywait -qe modify $base.cpp
+  inotifywait -qe modify $base.cpp -qe modify *.h
   clear
 
   $cc -Wall -g -std=${std:-c++1y} -o tmp/$base.o $base.cpp && tmp/$base.o

@@ -5,6 +5,8 @@
 #include <string>
 #include <fstream>
 
+namespace tiny {
+
 std::string curl(const std::string url) {
 
   // Construct the full command with redirects to stdout and stderr
@@ -19,10 +21,12 @@ std::string curl(const std::string url) {
   // Read the result from stdout
   std::stringstream ss;
   std::ifstream in(stdout_file);
-  ss << in.rdbuf();
+  ss << in.rdbuf() << '\n';
 
   // Return the response or an empty string if there wasn't one
   return ss.str();
+}
+
 }
 
 #endif
