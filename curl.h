@@ -18,7 +18,7 @@ std::string curl(const std::string url) {
   system(command.c_str());
 
   // Read the response written to the stdout file
-  std::stringstream ss;
+  std::stringstream ss("curl failed");
   ss << std::ifstream(file).rdbuf() << '\n';
 
   // Return the response or an empty string if there wasn't one
