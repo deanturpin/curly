@@ -1,4 +1,4 @@
-#include "curl.h"
+#include "curly.h"
 
 void get_url_and_dump_tokens(const std::string url,
                              const bool application_id = true) {
@@ -6,7 +6,7 @@ void get_url_and_dump_tokens(const std::string url,
   // Construct a CryptoCompare URL: prepend the domain and append the
   // application ID
   const auto cc = [&application_id](const std::string &url) {
-    return tiny::curl(
+    return curly(
         "https://min-api.cryptocompare.com/" + url +
         (application_id ? "&extraParams=https://github.com/deanturpin/arbitrage"
                         : ""));
@@ -18,12 +18,10 @@ void get_url_and_dump_tokens(const std::string url,
   std::puts(response.c_str());
 
   // Print tokens
-  std::puts("json");
-  for (const auto &t : tiny::json(response))
+  for (const auto &t : jsony(response))
     std::puts((t.first + '\t' + t.second).c_str());
 
-  std::puts("json2");
-  for (const auto &t : tiny::json2(response))
+  for (const auto &t : jsony2(response))
     std::puts((t.first + '\t' + t.second).c_str());
 }
 

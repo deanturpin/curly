@@ -1,5 +1,5 @@
-#ifndef TINY_CURL_H
-#define TINY_CURL_H
+#ifndef CURLY_H
+#define CURLY_H
 
 #include <sstream>
 #include <string>
@@ -7,11 +7,9 @@
 #include <fstream>
 #include <regex>
 
-namespace tiny {
+auto curly(const std::string url) {
 
-auto curl(const std::string url) {
-
-  std::puts("curl");
+  std::puts("curly");
 
   // Known errors
   const std::map<unsigned int, std::string> errors {
@@ -42,7 +40,9 @@ auto curl(const std::string url) {
 }
 
 // Parse JSON string and return map of tokens
-auto json(const std::string s) noexcept {
+auto jsony(const std::string s) noexcept {
+
+  std::puts("jsony");
 
   // Return a map of string/strings
   std::map<std::string, std::string> json_map;
@@ -73,14 +73,14 @@ auto json(const std::string s) noexcept {
   return json_map;
 }
 
-auto json2(const std::string s) noexcept {
+auto jsony2(const std::string) noexcept {
+
+  std::puts("jsony2");
 
   // Return a map of string/strings
   std::map<std::string, std::string> json_map;
 
   return json_map;
-}
-
 }
 
 #endif
