@@ -11,6 +11,8 @@ namespace tiny {
 
 auto curl(const std::string url) {
 
+  std::puts("curl");
+
   // Known errors
   const std::map<unsigned int, std::string> errors {
   {0, "ok"},
@@ -67,6 +69,14 @@ auto json(const std::string s) noexcept {
   } catch (std::regex_error e) {
     // Quietly discard exceptions
   }
+
+  return json_map;
+}
+
+auto json2(const std::string s) noexcept {
+
+  // Return a map of string/strings
+  std::map<std::string, std::string> json_map;
 
   return json_map;
 }

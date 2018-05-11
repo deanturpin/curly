@@ -18,7 +18,12 @@ void get_url_and_dump_tokens(const std::string url,
   std::puts(response.c_str());
 
   // Print tokens
+  std::puts("json");
   for (const auto &t : tiny::json(response))
+    std::puts((t.first + '\t' + t.second).c_str());
+
+  std::puts("json2");
+  for (const auto &t : tiny::json2(response))
     std::puts((t.first + '\t' + t.second).c_str());
 }
 

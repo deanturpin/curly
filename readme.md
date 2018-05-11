@@ -4,13 +4,8 @@ Status](https://travis-ci.org/deanturpin/arbitrage.svg?branch=master)](https://t
 All prices are fetched via the [CryptoCompare
 API](https://min-api.cryptocompare.com/).
 
-# Build and run
-```bash
-make update markets 
-```
-
-Written to avoid having to do the network bits in Python. Could be done with
-```popen``` but it's quite useful to log all the messages.
+Experimental header-only library providing minimal network connectivity and JSON
+handling in C++, removing the dependency on Python.
 
 # References
 * https://en.wikipedia.org/wiki/Arbitrage
