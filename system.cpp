@@ -1,5 +1,4 @@
 #include "curl.h"
-#include <iostream>
 
 void get_url_and_dump_tokens(const std::string url,
                              const bool application_id = true) {
@@ -16,15 +15,16 @@ void get_url_and_dump_tokens(const std::string url,
   // Request some prices and print the response
   const std::string response = cc(url);
 
-  std::cout << response << "\n\n";
+  std::puts(response.c_str());
 
   // Print tokens
   for (const auto &t : tiny::json(response))
-    std::cout << t.first << " : " << t.second << '\n';
+    std::puts((t.first + '\t' + t.second).c_str());
 }
 
 int main() {
 
-  get_url_and_dump_tokens("data/price?fsym=BTC&tsyms=USD,JPY,EUR,ETH");
+  get_url_and_dump_tokens("data/price?fsym=BTC&tsyms="
+                          "USD,JPY,EUR,ETH,LTC,DASH,BCH");
   // get_url_and_dump_tokens("data/all/exchanges", true);
 }

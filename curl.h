@@ -5,8 +5,6 @@
 #include <string>
 #include <map>
 #include <fstream>
-#include <algorithm>
-#include <iterator>
 #include <regex>
 
 namespace tiny {
