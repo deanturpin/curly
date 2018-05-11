@@ -1,5 +1,5 @@
 [![Build
-Status](https://travis-ci.org/deanturpin/arbitrage.svg?branch=master)](https://travis-ci.org/deanturpin/arbitrage)
+Status](https://travis-ci.org/deanturpin/curly.svg?branch=master)](https://travis-ci.org/deanturpin/curly)
 
 All prices are fetched via the [CryptoCompare
 API](https://min-api.cryptocompare.com/).
