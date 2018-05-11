@@ -1,25 +1,30 @@
 #include "curl.h"
-
 #include <iostream>
 
-int main() {
+void get_url_and_dump_tokens(const std::string url,
+                             const bool application_id = true) {
 
   // Construct a CryptoCompare URL: prepend the domain and append the
   // application ID
-  constexpr auto cc = [](const std::string &url) {
-    return tiny::curl("https://min-api.cryptocompare.com/" + url +
-                      "&extraParams=https://github.com/deanturpin/arbitrage");
+  const auto cc = [&application_id](const std::string &url) {
+    return tiny::curl(
+        "https://min-api.cryptocompare.com/" + url +
+        (application_id ? "&extraParams=https://github.com/deanturpin/arbitrage"
+                        : ""));
   };
 
   // Request some prices and print the response
-  const std::string response = cc("data/price?fsym=BTC&tsyms=USD,JPY,EUR,ETH");
+  const std::string response = cc(url);
 
-  std::cout << "Raw response\n" << response << '\n';
-
-  const auto tokens = tiny::json(response);
+  std::cout << response << "\n\n";
 
   // Print tokens
-  std::cout << "\nTokens\n";
-  for (const auto &t : tokens)
+  for (const auto &t : tiny::json(response))
     std::cout << t.first << " : " << t.second << '\n';
+}
+
+int main() {
+
+  get_url_and_dump_tokens("data/price?fsym=BTC&tsyms=USD,JPY,EUR,ETH");
+  // get_url_and_dump_tokens("data/all/exchanges", true);
 }

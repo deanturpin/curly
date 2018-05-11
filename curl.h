@@ -60,7 +60,9 @@ auto json(const std::string s) noexcept {
     // Create map, stripping empty tokens
     for (unsigned long i = 0; i < tokens.size(); ++i)
       if (tokens[i] != "") {
-        json_map[tokens[i]] = tokens[i + 1];
+        const auto key = tokens[i];
+        const auto value = tokens[i + 1];
+        json_map[key] = value;
         ++i;
       }
 
