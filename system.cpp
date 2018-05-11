@@ -12,5 +12,4 @@ int main() {
 
   // Request some prices and print the response
   std::cout << cc("data/price?fsym=BTC&tsyms=USD,JPY,EUR");
-  std::cout << "C'est fini\n";
 }
