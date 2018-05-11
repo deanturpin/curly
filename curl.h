@@ -36,7 +36,7 @@ std::string curl(const std::string url) {
   ss << std::ifstream(file).rdbuf();
 
   // Return the response (or error)
-  return ss.str() + '\n';
+  return ss.str();
 }
 
 }
