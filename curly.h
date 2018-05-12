@@ -3,7 +3,6 @@
 
 #include <sstream>
 #include <string>
-#include <map>
 #include <fstream>
 #include <regex>
 
@@ -45,7 +44,7 @@ auto curly(const std::string url, const bool use_network = true) {
 auto jsony(const std::string s) noexcept {
 
   // Return a map of string/strings
-  std::map<std::string, std::string> json_map;
+  std::vector<std::pair<std::string, std::string>> json;
 
   try {
 
@@ -62,7 +61,7 @@ auto jsony(const std::string s) noexcept {
       if (tokens[i] != "") {
         const auto key = tokens[i];
         const auto value = tokens[i + 1];
-        json_map[key] = value;
+        json.push_back(std::make_pair(key, value));
         ++i;
       }
 
@@ -70,7 +69,7 @@ auto jsony(const std::string s) noexcept {
     // Quietly discard exceptions
   }
 
-  return json_map;
+  return json;
 }
 
 #endif

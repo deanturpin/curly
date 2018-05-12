@@ -35,6 +35,7 @@ int main() {
       "WavesDEX", "Abucoins",  "BitTrex",
   };
 
+  // Request Bitcoin price from multiple exchanges
   for (const auto &e : exchanges)
     get_url_and_dump_tokens("data/price?fsym=BTC&tsyms=USD&e=" + e);
 }
