@@ -9,7 +9,7 @@
 auto curly(const std::string url, const bool use_network = true) {
 
   // Known errors
-  const std::map<unsigned int, std::string> errors {
+  const std::vector<std::pair<unsigned int, std::string>> errors {
   {0, "ok"},
   {1536, "no-network"},
   {32512, "path-to-curl-incorrect"},
@@ -24,7 +24,10 @@ auto curly(const std::string url, const bool use_network = true) {
   const unsigned int error_code = use_network ? system(command.c_str()) : 0;
 
   // Look up string for error code
-  const auto it = errors.find(error_code);
+  const auto it = std::find_if(errors.cbegin(), errors.cend(), [&error_code](const auto &e){
+                                return e.first == error_code;
+                               });
+
   const std::string error_string =
     (it != errors.cend() ? it->second : std::to_string(error_code));
 
@@ -40,10 +43,10 @@ auto curly(const std::string url, const bool use_network = true) {
   return ss.str();
 }
 
-// Parse JSON string and return map of tokens
+// Parse JSON string and return the tokens
 auto jsony(const std::string s) noexcept {
 
-  // Return a map of string/strings
+  // Prepare to return container of results
   std::vector<std::pair<std::string, std::string>> json;
 
   try {
