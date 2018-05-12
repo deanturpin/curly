@@ -30,10 +30,13 @@ try:
                 price = r.json();
                 if price:
                     good_exchanges[name] = price[to_symbol]
+                    # print(name, price[to_symbol])
+                    print("\"" + name + "\",")
 
     print(len(good_exchanges), "good exchanges")
-    for name in sorted(good_exchanges, key=lambda x : good_exchanges[x]):
-        print(name, good_exchanges[name])
+    # for name in sorted(good_exchanges, key=lambda x : good_exchanges[x]):
+    #for name in good_exchanges:
+        #print(name, good_exchanges[name])
 
 except Exception as e:
     print("exception ", e)

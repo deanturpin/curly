@@ -7,9 +7,7 @@
 #include <fstream>
 #include <regex>
 
-auto curly(const std::string url) {
-
-  std::puts("curly");
+auto curly(const std::string url, const bool use_network = true) {
 
   // Known errors
   const std::map<unsigned int, std::string> errors {
@@ -23,8 +21,8 @@ auto curly(const std::string url) {
   const std::string command =
     "/usr/bin/curl \'" + url + "\' 2> /tmp/stderr.txt 1> " + file;
 
-  // Attempt to run command
-  const unsigned int error_code = system(command.c_str());
+  // Attempt to run command (unless network access is disable)
+  const unsigned int error_code = use_network ? system(command.c_str()) : 0;
 
   // Look up string for error code
   const auto it = errors.find(error_code);
@@ -33,7 +31,11 @@ auto curly(const std::string url) {
 
   // Read the response written to the stdout file
   std::stringstream ss("{\"error\" : \"" + error_string + "\"}");
-  ss << std::ifstream(file).rdbuf();
+  std::ifstream in(file);
+  if (error_code == 0 && in.good()) {
+    ss.str("");
+    ss << in.rdbuf();
+  }
 
   // Return the response (or error)
   return ss.str();
@@ -41,8 +43,6 @@ auto curly(const std::string url) {
 
 // Parse JSON string and return map of tokens
 auto jsony(const std::string s) noexcept {
-
-  std::puts("jsony");
 
   // Return a map of string/strings
   std::map<std::string, std::string> json_map;
@@ -69,16 +69,6 @@ auto jsony(const std::string s) noexcept {
   } catch (std::regex_error e) {
     // Quietly discard exceptions
   }
-
-  return json_map;
-}
-
-auto jsony2(const std::string) noexcept {
-
-  std::puts("jsony2");
-
-  // Return a map of string/strings
-  std::map<std::string, std::string> json_map;
 
   return json_map;
 }
