@@ -59,5 +59,5 @@ int main() {
   // Print sorted list of BTC coins from each exchange
   std::sort(std::begin(btc), std::end(btc));
   for (const auto &r : btc)
-    std::cout << r.first << '\t' << r.second << '\n';
+    std::cout << static_cast<unsigned long>(r.first) << '\t' << r.second << '\n';
 }

@@ -8,49 +8,49 @@ implements ```popen()``` and uses the installed ```curl``` binary via ```system(
 Prices are fetched via the [CryptoCompare API](https://min-api.cryptocompare.com/).
 
 ```
-USD     8269.2          Bitfinex
-USD     8498.8          Cexio
-USD     14890           TheRockTrading
-USD     2546            BTCE
-USD     1861.8          Huobi
-USD     8248.03         BitBay
-USD     8250.78         BitSquare
-USD     8270.9          Kraken
-USD     8277.17         Coinbase
-USD     8255            Poloniex
-USD     8300            BTCChina
-USD     8211.14         Quoine
-USD     8900.1          BitFlip
-USD     530             CCEDK
-USD     8803.3          ExtStock
-USD     8133.08         Coinroom
-USD     620.5           CCEX
-USD     8812.3          LakeBTC
-USD     11857.7         OKCoin
-USD     7801.82         Remitano
-USD     9070.67         TrustDEX
-USD     8798            LiveCoin
-USD     8500            Gatecoin
-USD     8268.16         itBit
-USD     8400            QuadrigaCX
-USD     8329.69         HitBTC
-USD     8275            Gemini
-USD     410             Coinsetter
-USD     8340.1          Lykke
-USD     8300            DSX
-USD     8693            Yobit
-USD     8400            Coinfloor
-USD     8495.9          Bitlish
-USD     384.02          MonetaGo
-USD     8430            Exmo
-USD     427.93          Cryptsy
-USD     8274.55         Coincap
-USD     8296.94         Bitstamp
-USD     14468.9         LocalBitcoins
-USD     8273            bitFlyer
-USD     8364.67         WavesDEX
-USD     6738.23         Abucoins
-USD     8246.07         BitTrex
+384.02  MonetaGo
+410     Coinsetter
+427.93  Cryptsy
+530     CCEDK
+620.5   CCEX
+1861.8  Huobi
+2546    BTCE
+6738.23 Abucoins
+7801.82 Remitano
+8128.27 Coinroom
+8188.12 Quoine
+8215.2  Poloniex
+8220    BitTrex
+8233    bitFlyer
+8233.2  Bitfinex
+8244.9  Gemini
+8246.6  Kraken
+8250.78 BitSquare
+8251    DSX
+8253.44 Coinbase
+8253.89 Bitstamp
+8258.35 itBit
+8291.05 BitBay
+8293.48 Coincap
+8297.79 HitBTC
+8338    BTCChina
+8340.1  Lykke
+8364.67 WavesDEX
+8375.08 Exmo
+8400    Coinfloor
+8400    QuadrigaCX
+8459.1  Bitlish
+8479.1  Cexio
+8500    Gatecoin
+8643.19 Yobit
+8766    LiveCoin
+8774    ExtStock
+8812.31 LakeBTC
+8989    BitFlip
+9042    TrustDEX
+11246.2 LocalBitcoins
+11857.7 OKCoin
+14890   TheRockTrading
 ```
 
 # References
