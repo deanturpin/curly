@@ -10,7 +10,7 @@ std::string get_url_and_dump_tokens(const std::string url,
   const auto cc = [&application_id](const std::string &url) {
     return curly("https://min-api.cryptocompare.com/" + url +
                  (application_id
-                      ? "&extraParams=https://github.com/deanturpin/arbitrage"
+                      ? "&extraParams=https://github.com/deanturpin/curly"
                       : ""));
   };
 
