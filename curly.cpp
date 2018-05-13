@@ -56,8 +56,44 @@ int main() {
       btc.push_back(
           std::make_pair(std::strtod(response.second.c_str(), NULL), e));
 
+  std::cout << R"(
+<!DOCTYPE html>
+
+<meta charset="UTF-8">
+<meta name="robots" content="index,follow" />
+<link rel=icon href="favicon.ico" sizes="any">
+
+<script>
+onload = function(){
+  var seconds = (10 * 60) - (new Date()).getSeconds();
+  setTimeout(function() {
+    window.location.reload();
+  }, seconds * 1000);
+}
+</script>
+
+<style>
+body {
+  font-family: sans-serif;
+  background-color: #234;
+  color: white;
+  padding: 40px;
+}
+a:link, a:visited { color: lightblue; }
+h1 {
+  font-size: 100%;
+  text-transform: uppercase;
+  color: darkorange;
+}
+p.disclaimer { max-width: 700px; }
+</style>
+)";
+
   // Print sorted list of BTC coins from each exchange
   std::sort(std::begin(btc), std::end(btc));
+  std::cout << "<h1>BTC-USD</h1><pre>\n";
   for (const auto &r : btc)
     std::cout << static_cast<unsigned long>(r.first) << '\t' << r.second << '\n';
+
+  std::cout << "</pre>\n";
 }

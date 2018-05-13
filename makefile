@@ -1,4 +1,4 @@
-all: tmp source tmp/markets.csv
+all: tmp/index.html
 
 # Make working directory, all transient files are written here clean is easy
 tmp:
@@ -20,9 +20,8 @@ flags=-g -Werror -Wall -Wextra -pedantic -std=gnu++14
 tmp/%.o: %.cpp
 	$(CXX) $(flags) -o $@ $<
 
-markets: all
-	tmp/exchanges.o
-
+tmp/index.html: tmp/curly.o
+	$< > $@
 
 update: clean
 	make
