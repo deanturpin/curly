@@ -69,15 +69,13 @@ body {
   font-family: sans-serif;
   background-color: #c2eef1;
   color: black;
-  color: #f82f1f;
   padding: 40px;
 }
-h1 {
-  font-size: 100%;
-  text-transform: uppercase;
-  color: #ce905e;
-}
+h1 { color: #ce905e; }
+h2 { color: #f82f1f; }
 </style>
+
+<h1>Crypto exchanges</h1>
 )";
 
   for (const std::string &coin : {"BTC"}) {
@@ -92,7 +90,7 @@ h1 {
 
     // Print sorted list of prices from each exchange
     std::sort(std::begin(btc), std::end(btc));
-    std::cout << "<div><h1>" << coin << "-USD</h1><pre>\n";
+    std::cout << "<div><h2>" << coin << "-USD</h2><pre>\n";
     for (const auto &r : btc)
       std::cout << static_cast<unsigned long>(r.first) << '\t' << r.second << '\n';
     std::cout << "</pre></div>\n";
