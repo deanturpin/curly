@@ -57,7 +57,7 @@ int main() {
 
 <script>
 onload = function(){
-  var seconds = (10 * 60) - (new Date()).getSeconds();
+  var seconds = (5 * 60) - (new Date()).getSeconds();
   setTimeout(function() {
     window.location.reload();
   }, seconds * 1000);
