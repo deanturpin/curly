@@ -48,14 +48,6 @@ int main() {
       "WavesDEX", "Abucoins",  "BitTrex",
   };
 
-  // Request Bitcoin price from multiple exchanges
-  std::vector<std::pair<double, std::string>> btc;
-  for (const auto &e : exchanges)
-    for (const auto &response :
-         jsony(cc("data/price?fsym=BTC&tsyms=USD&e=" + e)))
-      btc.push_back(
-          std::make_pair(std::strtod(response.second.c_str(), NULL), e));
-
   std::cout << R"(
 <!DOCTYPE html>
 
@@ -77,23 +69,32 @@ body {
   font-family: sans-serif;
   background-color: #c2eef1;
   color: black;
+  color: #f82f1f;
   padding: 40px;
 }
-a:link, a:visited { color: #ce905e; }
 h1 {
   font-size: 100%;
   text-transform: uppercase;
-  color: #f82f1f;
+  color: #ce905e;
 }
-p.disclaimer { max-width: 700px; }
 </style>
 )";
 
-  // Print sorted list of BTC coins from each exchange
-  std::sort(std::begin(btc), std::end(btc));
-  std::cout << "<h1>BTC-USD</h1><pre>\n";
-  for (const auto &r : btc)
-    std::cout << static_cast<unsigned long>(r.first) << '\t' << r.second << '\n';
+  for (const std::string &coin : {"BTC"}) {
 
-  std::cout << "</pre>\n";
+    // Request prices from multiple exchanges
+    std::vector<std::pair<double, std::string>> btc;
+    for (const std::string &e : exchanges)
+      for (const auto &response :
+           jsony(cc("data/price?fsym=" + coin + "&tsyms=USD&e=" + e)))
+        btc.push_back(
+            std::make_pair(std::strtod(response.second.c_str(), NULL), e));
+
+    // Print sorted list of prices from each exchange
+    std::sort(std::begin(btc), std::end(btc));
+    std::cout << "<div><h1>" << coin << "-USD</h1><pre>\n";
+    for (const auto &r : btc)
+      std::cout << static_cast<unsigned long>(r.first) << '\t' << r.second << '\n';
+    std::cout << "</pre></div>\n";
+  }
 }
