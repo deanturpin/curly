@@ -22,6 +22,7 @@ tmp/%.o: %.cpp
 
 tmp/index.html: tmp/curly.o
 	$< > $@
+	@echo '<p>$(shell date --utc)</p>' >> $@
 
 update: clean
 	make
