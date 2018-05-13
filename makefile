@@ -1,4 +1,4 @@
-all: tmp/index.html
+all: tmp tmp/index.html
 
 # Make working directory, all transient files are written here clean is easy
 tmp:
@@ -31,3 +31,6 @@ format:
 
 example:
 	bin/all_exchanges.py
+
+gitpull:
+	git pull --quiet

@@ -75,15 +75,15 @@ onload = function(){
 <style>
 body {
   font-family: sans-serif;
-  background-color: #234;
-  color: white;
+  background-color: #c2eef1;
+  color: black;
   padding: 40px;
 }
-a:link, a:visited { color: lightblue; }
+a:link, a:visited { color: #ce905e; }
 h1 {
   font-size: 100%;
   text-transform: uppercase;
-  color: darkorange;
+  color: #f82f1f;
 }
 p.disclaimer { max-width: 700px; }
 </style>
