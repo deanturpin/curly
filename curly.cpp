@@ -78,7 +78,6 @@ int main() {
 
   // Order by final price
   std::sort(combined.begin(), combined.end());
-  std::reverse(combined.begin(), combined.end());
 
   // Print HTML header
   std::cout << std::ifstream("index.html").rdbuf();
