@@ -46,54 +46,57 @@ h2 { color: #f82f1f; }
 )";
 
   // Exchanges that offer BTC-USD
-  const std::vector<std::string> exchange_names{
-      "Bitfinex", "Cexio",     "TheRockTrading", "BTCE",          "Huobi",
-      "BitBay",   "BitSquare", "Kraken",         "Coinbase",      "Poloniex",
-      "BTCChina", "Quoine",    "BitFlip",        "CCEDK",         "ExtStock",
-      "Coinroom", "CCEX",      "LakeBTC",        "OKCoin",        "Remitano",
-      "TrustDEX", "LiveCoin",  "Gatecoin",       "itBit",         "QuadrigaCX",
-      "HitBTC",   "Gemini",    "Coinsetter",     "Lykke",         "DSX",
-      "Yobit",    "Coinfloor", "Bitlish",        "MonetaGo",      "Exmo",
-      "Cryptsy",  "Coincap",   "Bitstamp",       "LocalBitcoins", "bitFlyer",
-      "WavesDEX", "Abucoins",  "BitTrex",
+  const std::vector<std::string> stage1_exchanges{
+    "Bitstamp",
+      "CoinDeal",
+      "Kraken",
   };
 
-  std::vector<std::pair<std::string, std::vector<double>>> exchanges;
+  const std::vector<std::string> stage2_exchanges{
+    "Coinroom",
+      "BitSquare",
+      "Abucoins",
+  };
 
-  const std::string fiat = "USD";
-  for (const std::string &coin : {"BTC", "ETH", "BCH"}) {
+  // Request prices from multiple exchanges
+  std::vector<double> stage1_prices;
+  for (const std::string &name : stage1_exchanges) {
 
-    // Request prices from multiple exchanges
-    for (const std::string &name : exchange_names) {
+    const std::string to_symbol = "USD";
+    const std::string response = cc("data/price?fsym=BTC&tsyms=" + 
+                                    to_symbol + "&e=" + name);
 
-      const std::string response =
-        cc("data/price?fsym=" + coin + "&tsyms=" + fiat + "&e=" + name);
+    const double price =
+      std::strtod(find_token(to_symbol, response).c_str(), NULL);
 
-      const double price =
-        std::strtod(find_token(fiat, response).c_str(), NULL);
-
-      const auto it =
-        std::find_if(exchanges.begin(), exchanges.end(),
-                     [&name](const auto &e) { return e.first == name; });
-
-      if (it == exchanges.cend())
-        exchanges.push_back(std::make_pair(name, std::vector<double>({price})));
-      else
-        it->second.push_back(price);
-    }
+    if (price > 0.0)
+      stage1_prices.push_back(price);
   }
 
-  // Print sorted lists of prices from each exchange
-  std::sort(exchanges.begin(), exchanges.end(),
-            [](const auto &a, const auto &b) {
-            return a.second.front() > b.second.front();});
+  std::vector<double> stage2_prices;
+  for (const std::string &name : stage2_exchanges) {
 
-  std::cout << "<div><h2>USD</h2><pre>\nBTC\tETH\tBCH\tExchange\n";
-  for (const auto &e : exchanges) {
-    for (const auto &p : e.second)
-      std::cout << p << '\t';
-    std::cout << e.first << '\n';
+    const std::string to_symbol = "BTC";
+    const std::string response = cc("data/price?fsym=ETH&tsyms=" + 
+                                    to_symbol + "&e=" + name);
+
+    const double price =
+      std::strtod(find_token(to_symbol, response).c_str(), NULL);
+
+    if (price > 0.0)
+      stage2_prices.push_back(price);
   }
 
+  const double transaction = 10000;
+  std::vector<double> combined;
+  for (const auto &p : stage1_prices)
+    for (const auto &q : stage2_prices)
+      combined.push_back(transaction / (1/q * transaction/p));
+
+  std::sort(combined.begin(), combined.end());
+
+  std::cout << "<div><pre>\n";
+  for (const auto &c : combined)
+    std::cout << c << '\n';
   std::cout << "</pre></div>\n";
 }

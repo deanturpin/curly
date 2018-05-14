@@ -6,7 +6,7 @@ import requests
 try:
 
     from_symbol = "BTC"
-    to_symbol = "USD"
+    to_symbol = "EUR"
 
     good_exchanges = {}
 
