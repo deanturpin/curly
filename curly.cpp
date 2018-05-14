@@ -88,6 +88,6 @@ int main() {
   std::cout << "<div><pre>\n";
   std::cout << "<h2>USD > BTC > ETH</h2>\n";
   for (const auto &c : combined)
-    std::cout << c.first << '\t- ' << c.second << '\n';
+    std::cout << c.first << "\t- " << c.second << '\n';
   std::cout << "</pre></div>\n";
 }
