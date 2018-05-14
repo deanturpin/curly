@@ -51,7 +51,7 @@ int main() {
     const double price =
         std::strtod(find_token(to_symbol, response).c_str(), NULL);
 
-    if (price > 0.0)
+    if (price > 8000.0 && price < 10000.0)
       stage1_prices.push_back({price, name});
   }
 
@@ -66,7 +66,7 @@ int main() {
     const double price =
         std::strtod(find_token(to_symbol, response).c_str(), NULL);
 
-    if (price > 0.0)
+    if (price > 0.08)
       stage2_prices.push_back({price, name});
   }
 
