@@ -1,5 +1,5 @@
-[![Build
-Status](https://travis-ci.org/deanturpin/curly.svg?branch=master)](https://travis-ci.org/deanturpin/curly)
+[![Build Status](https://travis-ci.org/deanturpin/curly.svg?branch=master)](https://travis-ci.org/deanturpin/curly)
+[![codecov](https://codecov.io/gh/deanturpin/curly/branch/master/graph/badge.svg)](https://codecov.io/gh/deanturpin/curly)
 
 Experimental header-only library providing minimal network connectivity and JSON
 handling in C++, removing the dependency on Python. The library essentially
