@@ -86,8 +86,9 @@ int main() {
   std::cout << std::ifstream("index.html").rdbuf();
 
   // Print the combined prices
-  std::cout << "<div><pre>\n";
+  std::cout << "<div>\n";
   std::cout << "<h2>USD > BTC > USD</h2>\n";
+  std::cout << "<pre>\n";
   std::cout << std::fixed << std::setprecision(0);
   for (const auto &c : combined)
     std::cout << 100.0 * c.first << " %\t" << c.second << '\n';
