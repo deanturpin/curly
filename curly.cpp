@@ -40,7 +40,7 @@ int main() {
       "WavesDEX", "CCEDK",         "Coinbase",
   };
 
-  // Request prices from multiple exchanges
+  // Stage 1 - USD to BTC
   std::vector<std::pair<double, std::string>> stage1_prices;
   for (const std::string &name : stage1_exchanges) {
 
@@ -55,6 +55,7 @@ int main() {
       stage1_prices.push_back({price, name});
   }
 
+  // Stage 2 - BTC to ETH
   decltype(stage1_prices) stage2_prices;
   for (const std::string &name : stage2_exchanges) {
 
@@ -69,16 +70,20 @@ int main() {
       stage2_prices.push_back({price, name});
   }
 
+  // Calculate all combinations of prices from all exchanges
   decltype(stage2_prices) combined;
   for (const auto &p : stage1_prices)
     for (const auto &q : stage2_prices)
       combined.push_back({p.first * q.first, p.second + " > " + q.second});
 
+  // Order by final price
   std::sort(combined.begin(), combined.end());
+  std::reverse(combined.begin(), combined.end());
 
   // Print HTML header
   std::cout << std::ifstream("index.html").rdbuf();
 
+  // Print the combined prices
   std::cout << "<div><pre>\n";
   std::cout << "<h2>USD > BTC > ETH</h2>\n";
   for (const auto &c : combined)
