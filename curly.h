@@ -47,7 +47,7 @@ std::string curly(const std::string url, const bool use_network = true) {
 // Search for a JSON key/value pair
 std::string find_token(const std::string &token, const std::string s) noexcept {
 
-  std::string token_value = "not found";
+  std::string token_value = "";
 
   const auto i = s.find('"' + token + '"');
   if (i != std::string::npos) {
