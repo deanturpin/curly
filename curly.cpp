@@ -41,7 +41,7 @@ int main() {
   };
 
   // Request prices from multiple exchanges
-  std::vector<double> stage1_prices;
+  std::vector<std::pair<double, std::string>> stage1_prices;
   for (const std::string &name : stage1_exchanges) {
 
     const std::string to_symbol = "USD";
@@ -52,10 +52,10 @@ int main() {
         std::strtod(find_token(to_symbol, response).c_str(), NULL);
 
     if (price > 0.0)
-      stage1_prices.push_back(price);
+      stage1_prices.push_back({price, name});
   }
 
-  std::vector<double> stage2_prices;
+  decltype(stage1_prices) stage2_prices;
   for (const std::string &name : stage2_exchanges) {
 
     const std::string to_symbol = "BTC";
@@ -66,13 +66,13 @@ int main() {
         std::strtod(find_token(to_symbol, response).c_str(), NULL);
 
     if (price > 0.0)
-      stage2_prices.push_back(price);
+      stage2_prices.push_back({price, name});
   }
 
-  std::vector<double> combined;
+  decltype(stage2_prices) combined;
   for (const auto &p : stage1_prices)
     for (const auto &q : stage2_prices)
-      combined.push_back(q * p);
+      combined.push_back({p.first * q.first, p.second + " > " + q.second});
 
   std::sort(combined.begin(), combined.end());
 
@@ -80,7 +80,8 @@ int main() {
   std::cout << std::ifstream("index.html").rdbuf();
 
   std::cout << "<div><pre>\n";
+  std::cout << "<h2>USD > BTC > ETH</h2>\n";
   for (const auto &c : combined)
-    std::cout << c << '\n';
+    std::cout << c.first << '\t' << c.second << '\n';
   std::cout << "</pre></div>\n";
 }
