@@ -42,7 +42,7 @@ h1 { color: #ce905e; }
 h2 { color: #f82f1f; }
 </style>
 
-<h1>Crypto exchanges</h1>
+<h1>curly</h1>
 )";
 
   // Exchanges that offer BTC-USD
