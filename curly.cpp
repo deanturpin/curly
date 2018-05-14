@@ -1,6 +1,7 @@
 #include "curly.h"
 #include <iomanip>
 #include <iostream>
+#include <iterator>
 
 int main() {
 
@@ -40,7 +41,6 @@ int main() {
       "WavesDEX", "CCEDK",         "Coinbase",
   };
 
-  // Stage 1 - USD to BTC
   std::vector<std::pair<double, std::string>> stage1_prices;
   for (const std::string &name : stage1_exchanges) {
 
@@ -55,28 +55,15 @@ int main() {
       stage1_prices.push_back({price, name});
   }
 
-  // Stage 2 - BTC to ETH
-  decltype(stage1_prices) stage2_prices;
-  for (const std::string &name : stage2_exchanges) {
-
-    const std::string to_symbol = "BTC";
-    const std::string response =
-        cc("data/price?fsym=ETH&tsyms=" + to_symbol + "&e=" + name);
-
-    const double price =
-        std::strtod(find_token(to_symbol, response).c_str(), NULL);
-
-    if (price > 0.08)
-      stage2_prices.push_back({price, name});
-  }
-
   // Calculate all combinations of prices from all exchanges
-  decltype(stage2_prices) combined;
-  for (const auto &p : stage1_prices)
-    for (const auto &q : stage1_prices)
-      combined.push_back({q.first / p.first,
-                          p.second + " " + std::to_string(p.first) + " > " +
-                              q.second + " " + std::to_string(q.first)});
+  decltype(stage1_prices) combined;
+  auto p = stage1_prices.cbegin();
+  auto q = stage1_prices.crbegin();
+
+  for (; p != stage1_prices.cend(); ++p, ++q) 
+    combined.push_back({q->first / p->first,
+                       p->second + " " + std::to_string(p->first) + " > " +
+                       q->second + " " + std::to_string(q->first)});
 
   // Order by final price
   std::sort(combined.begin(), combined.end());
