@@ -7,4 +7,6 @@ install:
 
 language: c++
 
-script: make CXX=g++-6 source
+script:
+  make CXX=g++-6 EXTRA=--coverage source
+  bash <(curl -s https://codecov.io/bash)

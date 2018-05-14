@@ -15,7 +15,8 @@ source: tmp
 	make --jobs $(JOBS) $(objects)
 
 CXX=clang++-4.0
-flags=-g -Werror -Wall -Wextra -pedantic -std=gnu++14
+EXTRA=
+flags=-g -Werror -Wall -Wextra -pedantic -std=c++14 $(EXTRA)
 
 tmp/%.o: %.cpp
 	$(CXX) $(flags) -o $@ $<
