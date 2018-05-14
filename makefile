@@ -5,6 +5,7 @@ tmp:
 	mkdir -p $@
 clean:
 	rm -rf tmp
+	rm -f *.gcno *.gcda
 
 tmp/%.csv: bin/%.py
 	./$< > $@

@@ -8,5 +8,5 @@ addons:
     packages: g++-6
 
 script:
-  - make CXX=g++-6 EXTRA=--coverage source
+  - make CXX=g++-6 EXTRA=--coverage
   - bash <(curl -s https://codecov.io/bash)
