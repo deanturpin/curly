@@ -61,7 +61,7 @@ h2 { color: #f82f1f; }
   std::vector<std::pair<std::string, std::vector<double>>> exchanges;
 
   const std::string fiat = "USD";
-  for (const std::string &coin : {"BTC", "ETH"}) {
+  for (const std::string &coin : {"BTC", "ETH", "BCH"}) {
 
     // Request prices from multiple exchanges
     for (const std::string &name : exchange_names) {
@@ -88,7 +88,7 @@ h2 { color: #f82f1f; }
             [](const auto &a, const auto &b) {
             return a.second.front() > b.second.front();});
 
-  std::cout << "<div><h2>USD</h2><pre>\nBTC\tETH\tExchange\n";
+  std::cout << "<div><h2>USD</h2><pre>\nBTC\tETH\tBCH\tExchange\n";
   for (const auto &e : exchanges) {
     for (const auto &p : e.second)
       std::cout << p << '\t';
