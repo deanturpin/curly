@@ -87,9 +87,9 @@ int main() {
 
   // Print the combined prices
   std::cout << "<div><pre>\n";
-  std::cout << "<h2>USD > BTC > USD</h2>\n";
-  std::cout.precision(3);
+  std::cout << "<h2>USD > BTC > USD</h2>\n%\n";
+  std::cout.precision(0);
   for (const auto &c : combined)
-    std::cout << c.first << '\t' << c.second << '\n';
+    std::cout << 100.0 * c.first << '\t' << c.second << '\n';
   std::cout << "</pre></div>\n";
 }
