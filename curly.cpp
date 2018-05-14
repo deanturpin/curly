@@ -74,7 +74,7 @@ int main() {
   decltype(stage2_prices) combined;
   for (const auto &p : stage1_prices)
     for (const auto &q : stage1_prices)
-      combined.push_back({p.first / q.first,
+      combined.push_back({q.first / p.first,
                           p.second + " " + std::to_string(p.first) + " > " +
                               q.second + " " + std::to_string(q.first)});
 
@@ -88,7 +88,7 @@ int main() {
   // Print the combined prices
   std::cout << "<div><pre>\n";
   std::cout << "<h2>USD > BTC > USD</h2>\n%\n";
-  std::cout.precision(0);
+  std::cout << std::fixed << std::setprecision(0);
   for (const auto &c : combined)
     std::cout << 100.0 * c.first << '\t' << c.second << '\n';
   std::cout << "</pre></div>\n";
