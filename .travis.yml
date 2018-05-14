@@ -4,6 +4,7 @@ language: c++
 
 addons:
   apt:
+    update: true
     sources: ubuntu-toolchain-r-test
     packages: g++-6
 
