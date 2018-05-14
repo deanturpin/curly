@@ -74,7 +74,9 @@ int main() {
   decltype(stage2_prices) combined;
   for (const auto &p : stage1_prices)
     for (const auto &q : stage2_prices)
-      combined.push_back({p.first * q.first, p.second + " > " + q.second});
+      combined.push_back({p.first * q.first,
+                          p.second + " " + std::to_string(p.first) + " > " +
+                              q.second + " " + std::to_string(q.first)});
 
   // Order by final price
   std::sort(combined.begin(), combined.end());
@@ -86,6 +88,6 @@ int main() {
   std::cout << "<div><pre>\n";
   std::cout << "<h2>USD > BTC > ETH</h2>\n";
   for (const auto &c : combined)
-    std::cout << c.first << '\t' << c.second << '\n';
+    std::cout << c.first << '\t- ' << c.second << '\n';
   std::cout << "</pre></div>\n";
 }
