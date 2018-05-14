@@ -31,16 +31,7 @@ int main() {
       "Bitlish",   "LiveCoin",   "LocalBitcoins",
   };
 
-  const std::vector<std::string> stage2_exchanges{
-      "Bitstamp", "CoinDeal",      "Kraken",    "Lykke",          "LakeBTC",
-      "MonetaGo", "itBit",         "BTCE",      "TheRockTrading", "Paymium",
-      "Coinroom", "BitSquare",     "Abucoins",  "Cexio",          "LiveCoin",
-      "DSX",      "LocalBitcoins", "Exmo",      "BitMarket",      "HitBTC",
-      "ExtStock", "Yacuna",        "Coinfloor", "Quoine",         "Bitfinex",
-      "BitBay",   "Gatecoin",      "Cryptsy",   "BitFlip",        "Bitlish",
-      "WavesDEX", "CCEDK",         "Coinbase",
-  };
-
+  // Fetch prices for each exchange
   std::vector<std::pair<double, std::string>> stage1_prices;
   for (const std::string &name : stage1_exchanges) {
 
@@ -55,20 +46,6 @@ int main() {
       stage1_prices.push_back({price, name});
   }
 
-  // Calculate all combinations of prices from all exchanges
-  decltype(stage1_prices) combined;
-  auto p = stage1_prices.cbegin();
-  auto q = stage1_prices.crbegin();
-
-  for (; p != stage1_prices.cend(); ++p, ++q) 
-    combined.push_back({q->first / p->first,
-                       p->second + " " + std::to_string(p->first) + " > " +
-                       q->second + " " + std::to_string(q->first)});
-
-  // Order by final price
-  std::sort(combined.begin(), combined.end());
-  std::reverse(combined.begin(), combined.end());
-
   // Print HTML header
   std::cout << std::ifstream("index.html").rdbuf();
 
@@ -77,7 +54,18 @@ int main() {
   std::cout << "<h2>USD > BTC > USD</h2>\n";
   std::cout << "<pre>\n";
   std::cout << std::fixed << std::setprecision(0);
-  for (const auto &c : combined)
-    std::cout << 100.0 * c.first << " %\t" << c.second << '\n';
+
+  // Sort the prices before calculating the combinations
+  std::sort(stage1_prices.begin(), stage1_prices.end());
+
+  // Calculate all combinations of prices
+  auto p = stage1_prices.cbegin();
+  auto q = stage1_prices.crbegin();
+
+  for (; p != stage1_prices.cend() && q != stage1_prices.crend(); ++p, ++q)
+    std::cout << 100.0 * q->first / p->first << " %\t" <<
+                        p->second << " " << p->first << " > " +
+                            q->second << " " << q->first << '\n';
+
   std::cout << "</pre></div>\n";
 }
