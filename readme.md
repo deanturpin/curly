@@ -8,49 +8,38 @@ implements ```popen()``` and uses the installed ```curl``` binary via ```system(
 Prices are fetched via the [CryptoCompare API](https://min-api.cryptocompare.com/).
 
 ```
-384.02  MonetaGo
-410     Coinsetter
-427.93  Cryptsy
-530     CCEDK
-620.5   CCEX
-1861.8  Huobi
-2546    BTCE
-6738.23 Abucoins
-7801.82 Remitano
-8128.27 Coinroom
-8188.12 Quoine
-8215.2  Poloniex
-8220    BitTrex
-8233    bitFlyer
-8233.2  Bitfinex
-8244.9  Gemini
-8246.6  Kraken
-8250.78 BitSquare
-8251    DSX
-8253.44 Coinbase
-8253.89 Bitstamp
-8258.35 itBit
-8291.05 BitBay
-8293.48 Coincap
-8297.79 HitBTC
-8338    BTCChina
-8340.1  Lykke
-8364.67 WavesDEX
-8375.08 Exmo
-8400    Coinfloor
-8400    QuadrigaCX
-8459.1  Bitlish
-8479.1  Cexio
-8500    Gatecoin
-8643.19 Yobit
-8766    LiveCoin
-8774    ExtStock
-8812.31 LakeBTC
-8989    BitFlip
-9042    TrustDEX
-11246.2 LocalBitcoins
-11857.7 OKCoin
-14890   TheRockTrading
+116 %   Bitlish 8310 > TrustDEX 9640
+108 %   BitBay 8522 > Gatecoin 9184
+107 %   Coinroom 8572 > BitFlip 9179
+105 %   BTCChina 8684 > Yobit 9103
+104 %   Exmo 8693 > LiveCoin 9065
+104 %   DSX 8700 > ExtStock 9037
+102 %   Coincap 8723 > LakeBTC 8900
+102 %   Coinfloor 8726 > Lykke 8887
+101 %   Quoine 8746 > Cexio 8826
+101 %   Poloniex 8746 > QuadrigaCX 8802
+100 %   Bitfinex 8751 > BitSquare 8783
+100 %   Kraken 8751 > bitFlyer 8779
+100 %   Gemini 8758 > HitBTC 8777
+100 %   Coinbase 8758 > WavesDEX 8765
+100 %   itBit 8761 > BitTrex 8764
+100 %   Bitstamp 8762 > Bitstamp 8762
+100 %   BitTrex 8764 > itBit 8761
+100 %   WavesDEX 8765 > Coinbase 8758
+100 %   HitBTC 8777 > Gemini 8758
+100 %   bitFlyer 8779 > Kraken 8751
+100 %   BitSquare 8783 > Bitfinex 8751
+99 %    QuadrigaCX 8802 > Poloniex 8746
+99 %    Cexio 8826 > Quoine 8746
+98 %    Lykke 8887 > Coinfloor 8726
+98 %    LakeBTC 8900 > Coincap 8723
+96 %    ExtStock 9037 > DSX 8700
+96 %    LiveCoin 9065 > Exmo 8693
+95 %    Yobit 9103 > BTCChina 8684
+93 %    BitFlip 9179 > Coinroom 8572
+93 %    Gatecoin 9184 > BitBay 8522
+86 %    TrustDEX 9640 > Bitlish 8310
+
 ```
 
 # References
