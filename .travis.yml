@@ -1,12 +1,12 @@
-before_install:
-  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-  - sudo apt-get update
-
-install:
-  - sudo apt-get -y install g++-6
-
+dist: trusty
+sudo: false
 language: c++
 
+addons:
+  apt:
+    sources: ubuntu-toolchain-r-test
+    packages: g++-6
+
 script:
-  make CXX=g++-6 EXTRA=--coverage source
-  bash <(curl -s https://codecov.io/bash)
+  - make CXX=g++-6 EXTRA=--coverage source
+  - bash <(curl -s https://codecov.io/bash)
