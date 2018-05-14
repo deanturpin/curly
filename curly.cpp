@@ -73,21 +73,23 @@ int main() {
   // Calculate all combinations of prices from all exchanges
   decltype(stage2_prices) combined;
   for (const auto &p : stage1_prices)
-    for (const auto &q : stage2_prices)
-      combined.push_back({p.first * q.first,
+    for (const auto &q : stage1_prices)
+      combined.push_back({p.first / q.first,
                           p.second + " " + std::to_string(p.first) + " > " +
                               q.second + " " + std::to_string(q.first)});
 
   // Order by final price
   std::sort(combined.begin(), combined.end());
+  std::reverse(combined.begin(), combined.end());
 
   // Print HTML header
   std::cout << std::ifstream("index.html").rdbuf();
 
   // Print the combined prices
   std::cout << "<div><pre>\n";
-  std::cout << "<h2>USD > BTC > ETH</h2>\n";
+  std::cout << "<h2>USD > BTC > USD</h2>\n";
+  std::cout.precision(3);
   for (const auto &c : combined)
-    std::cout << c.first << "\t- " << c.second << '\n';
+    std::cout << c.first << '\t' << c.second << '\n';
   std::cout << "</pre></div>\n";
 }
