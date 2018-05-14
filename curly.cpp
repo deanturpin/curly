@@ -2,26 +2,27 @@
 #include <iomanip>
 #include <iostream>
 
-std::string get_url_and_dump_tokens(const std::string url,
-                                    const bool application_id = true) {
-
-  // Construct a CryptoCompare URL: prepend the domain and append the
-  // application ID
-  const auto cc = [&application_id](const std::string &url) {
-    return curly("https://min-api.cryptocompare.com/" + url +
-                 (application_id
-                      ? "&extraParams=https://github.com/deanturpin/curly"
-                      : ""));
-  };
-
-  // Request some prices and print the tokens
-  const std::string response = cc(url);
-  std::stringstream ss;
-  for (const auto &t : jsony(response))
-    ss << t.first << '\t' << std::strtod(t.second.c_str(), NULL) << '\t';
-
-  return ss.str();
-}
+// std::string get_url_and_dump_tokens(const std::string url,
+//                                     const bool application_id = true) {
+//
+//   // Construct a CryptoCompare URL: prepend the domain and append the
+//   // application ID
+//   const auto cc = [&application_id](const std::string &url) {
+//     return curly("https://min-api.cryptocompare.com/" + url +
+//                  (application_id
+//                       ? "&extraParams=https://github.com/deanturpin/curly"
+//                       : ""));
+//   };
+//
+//   // Request some prices and print the tokens
+//   const std::string response = cc(url);
+//   // std::stringstream ss;
+//
+//   const auto token = find_token(coin, response);
+//   // ss << std::strtod(token.c_str(), NULL) << '\t';
+//
+//   return token;
+// }
 
 int main() {
 
@@ -78,21 +79,26 @@ h2 { color: #f82f1f; }
 <h1>Crypto exchanges</h1>
 )";
 
-  for (const std::string &coin : {"BTC"}) {
+  const std::string fiat = "USD";
+  for (const std::string &coin : {"ETH"}) {
 
     // Request prices from multiple exchanges
     std::vector<std::pair<double, std::string>> btc;
-    for (const std::string &e : exchanges)
-      for (const auto &response :
-           jsony(cc("data/price?fsym=" + coin + "&tsyms=USD&e=" + e)))
-        btc.push_back(
-            std::make_pair(std::strtod(response.second.c_str(), NULL), e));
+    for (const std::string &exchange : exchanges) {
+
+      const std::string response =
+          cc("data/price?fsym=" + coin + "&tsyms=" + fiat + "&e=" + exchange);
+
+      const std::string token = find_token(fiat, response);
+      btc.push_back(std::make_pair(std::strtod(token.c_str(), NULL), exchange));
+    }
 
     // Print sorted list of prices from each exchange
     std::sort(std::begin(btc), std::end(btc));
     std::cout << "<div><h2>" << coin << "-USD</h2><pre>\n";
     for (const auto &r : btc)
-      std::cout << static_cast<unsigned long>(r.first) << '\t' << r.second << '\n';
+      std::cout << static_cast<unsigned long>(r.first) << '\t' << r.second
+                << '\n';
     std::cout << "</pre></div>\n";
   }
 }
