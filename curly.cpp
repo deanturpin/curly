@@ -9,53 +9,35 @@ int main() {
   const auto application_id = true;
   const auto cc = [&application_id](const std::string &url) {
     return curly("https://min-api.cryptocompare.com/" + url +
-                 (application_id
-                      ? "&extraParams=https://github.com/deanturpin/curly"
-                      : ""));
+                     (application_id
+                          ? "&extraParams=https://github.com/deanturpin/curly"
+                          : ""),
+                 true);
   };
-
-  // Print HTML header
-  std::cout << R"(
-<!DOCTYPE html>
-
-<meta charset="UTF-8">
-<meta name="robots" content="index,follow" />
-<link rel=icon href="favicon.ico" sizes="any">
-
-<script>
-onload = function(){
-  var seconds = (5 * 60) - (new Date()).getSeconds();
-  setTimeout(function() {
-    window.location.reload();
-  }, seconds * 1000);
-}
-</script>
-
-<style>
-body {
-  font-family: sans-serif;
-  background-color: #c2eef1;
-  color: black;
-  padding: 40px;
-}
-h1 { color: #ce905e; }
-h2 { color: #f82f1f; }
-</style>
-
-<h1>curly</h1>
-)";
 
   // Exchanges that offer BTC-USD
   const std::vector<std::string> stage1_exchanges{
-    "Bitstamp",
-      "CoinDeal",
-      "Kraken",
+      "BitBay",    "Bitstamp",   "TrustDEX",       "itBit",
+      "BTCChina",  "Kraken",     "TheRockTrading", "Poloniex",
+      "Cexio",     "CCEDK",      "BitSquare",      "DSX",
+      "Coinbase",  "LakeBTC",    "Coinroom",       "Gemini",
+      "Coincap",   "Bitfinex",   "MonetaGo",       "Quoine",
+      "Lykke",     "BitFlip",    "Huobi",          "Gatecoin",
+      "Abucoins",  "Cryptsy",    "BTCE",           "HitBTC",
+      "bitFlyer",  "Remitano",   "WavesDEX",       "CCEX",
+      "BitTrex",   "Exmo",       "Yobit",          "OKCoin",
+      "Coinfloor", "QuadrigaCX", "ExtStock",       "Coinsetter",
+      "Bitlish",   "LiveCoin",   "LocalBitcoins",
   };
 
   const std::vector<std::string> stage2_exchanges{
-    "Coinroom",
-      "BitSquare",
-      "Abucoins",
+      "Bitstamp", "CoinDeal",      "Kraken",    "Lykke",          "LakeBTC",
+      "MonetaGo", "itBit",         "BTCE",      "TheRockTrading", "Paymium",
+      "Coinroom", "BitSquare",     "Abucoins",  "Cexio",          "LiveCoin",
+      "DSX",      "LocalBitcoins", "Exmo",      "BitMarket",      "HitBTC",
+      "ExtStock", "Yacuna",        "Coinfloor", "Quoine",         "Bitfinex",
+      "BitBay",   "Gatecoin",      "Cryptsy",   "BitFlip",        "Bitlish",
+      "WavesDEX", "CCEDK",         "Coinbase",
   };
 
   // Request prices from multiple exchanges
@@ -63,11 +45,11 @@ h2 { color: #f82f1f; }
   for (const std::string &name : stage1_exchanges) {
 
     const std::string to_symbol = "USD";
-    const std::string response = cc("data/price?fsym=BTC&tsyms=" + 
-                                    to_symbol + "&e=" + name);
+    const std::string response =
+        cc("data/price?fsym=BTC&tsyms=" + to_symbol + "&e=" + name);
 
     const double price =
-      std::strtod(find_token(to_symbol, response).c_str(), NULL);
+        std::strtod(find_token(to_symbol, response).c_str(), NULL);
 
     if (price > 0.0)
       stage1_prices.push_back(price);
@@ -77,23 +59,25 @@ h2 { color: #f82f1f; }
   for (const std::string &name : stage2_exchanges) {
 
     const std::string to_symbol = "BTC";
-    const std::string response = cc("data/price?fsym=ETH&tsyms=" + 
-                                    to_symbol + "&e=" + name);
+    const std::string response =
+        cc("data/price?fsym=ETH&tsyms=" + to_symbol + "&e=" + name);
 
     const double price =
-      std::strtod(find_token(to_symbol, response).c_str(), NULL);
+        std::strtod(find_token(to_symbol, response).c_str(), NULL);
 
     if (price > 0.0)
       stage2_prices.push_back(price);
   }
 
-  const double transaction = 10000;
   std::vector<double> combined;
   for (const auto &p : stage1_prices)
     for (const auto &q : stage2_prices)
-      combined.push_back(transaction / (1/q * transaction/p));
+      combined.push_back(q * p);
 
   std::sort(combined.begin(), combined.end());
+
+  // Print HTML header
+  std::cout << std::ifstream("index.html").rdbuf();
 
   std::cout << "<div><pre>\n";
   for (const auto &c : combined)
