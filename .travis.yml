@@ -16,9 +16,7 @@ script:
 deploy:
   provider: pages
   github-token: ${api_key}
-  file: tmp/index.html
   skip-cleanup: true
   keep-history: true
   on:
     branch: master
-    # tags: true
