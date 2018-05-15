@@ -16,7 +16,9 @@ script:
 deploy:
   provider: pages
   github-token: ${api_key}
-  skip-cleanup: true
   keep-history: true
+  file-glob: true
+  file: tmp/*
+  skip-cleanup: true
   on:
     branch: master
