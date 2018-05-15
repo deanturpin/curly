@@ -47,11 +47,11 @@ int main() {
   }
 
   // Print HTML header
-  std::cout << std::ifstream("index.html").rdbuf();
+  std::cout << std::ifstream("bin/index.html").rdbuf();
 
   // Print the combined prices
   std::cout << "<div>\n";
-  std::cout << "<h2>USD > BTC > USD</h2>\n";
+  std::cout << "<h2>BTC-USD</h2>\n";
   std::cout << "<pre>\n";
   std::cout << std::fixed << std::setprecision(0);
 
