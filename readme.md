@@ -40,7 +40,6 @@ Prices are fetched via the [CryptoCompare API](https://min-api.cryptocompare.com
 93 %    BitFlip 9179 > Coinroom 8572
 93 %    Gatecoin 9184 > BitBay 8522
 86 %    TrustDEX 9640 > Bitlish 8310
-
 ```
 
 # References
