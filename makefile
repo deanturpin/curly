@@ -38,3 +38,8 @@ example:
 
 gitpull:
 	git pull --quiet
+
+trigger-build:
+	date > trigger.txt
+	git commit trigger.txt -m "cron"
+	git push
