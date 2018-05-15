@@ -17,9 +17,9 @@ std::string curly(const std::string url, const bool use_network = true) {
   };
 
   // Construct the command with redirects to stdout and stderr
-  const std::string file = "/tmp/stdout.txt";
+  const std::string file = "tmp/stdout.txt";
   const std::string command =
-    "/usr/bin/curl \'" + url + "\' 2> /tmp/stderr.txt 1> " + file;
+    "/usr/bin/curl \'" + url + "\' 2> tmp/stderr.txt 1> " + file;
 
   // Attempt to run command (unless network access is disable)
   const unsigned int error_code = use_network ? system(command.c_str()) : 0;
