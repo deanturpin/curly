@@ -17,5 +17,6 @@ deploy:
   provider: pages
   github-token: ${api_key}
   keep-history: true
+  file: index.html
   on:
     branch: master
