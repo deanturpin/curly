@@ -10,41 +10,35 @@ int main() {
   const auto application_id = true;
   const auto cc = [&application_id](const std::string &url) {
     return curly("https://min-api.cryptocompare.com/" + url +
-                     (application_id
-                          ? "&extraParams=https://github.com/deanturpin/curly"
-                          : ""),
-                 true);
+                 (application_id
+                      ? "&extraParams=https://github.com/deanturpin/curly"
+                      : ""));
   };
 
-  // Exchanges that offer BTC-USD
+  // Exchanges
   const std::vector<std::string> stage1_exchanges{
-      "BitBay",    "Bitstamp",   "TrustDEX",       "itBit",
-      "BTCChina",  "Kraken",     "TheRockTrading", "Poloniex",
-      "Cexio",     "CCEDK",      "BitSquare",      "DSX",
-      "Coinbase",  "LakeBTC",    "Coinroom",       "Gemini",
-      "Coincap",   "Bitfinex",   "MonetaGo",       "Quoine",
-      "Lykke",     "BitFlip",    "Huobi",          "Gatecoin",
-      "Abucoins",  "Cryptsy",    "BTCE",           "HitBTC",
-      "bitFlyer",  "Remitano",   "WavesDEX",       "CCEX",
-      "BitTrex",   "Exmo",       "Yobit",          "OKCoin",
-      "Coinfloor", "QuadrigaCX", "ExtStock",       "Coinsetter",
-      "Bitlish",   "LiveCoin",   "LocalBitcoins",
+      "HitBTC",   "Bitfinex", "Cexio",    "Quoine",  "ExtStock", "BitFlip",
+      "Coinbase", "Gatecoin", "Lykke",    "BitTrex", "Bitstamp", "Coinroom",
+      "LiveCoin", "Kraken",   "Exmo",     "DSX",     "Bitlish",  "Gemini",
+      "CCEX",     "Coincap",  "Poloniex", "BitBay",  "Yobit",    "WavesDEX",
   };
+
+  const std::string from_symbol = "ETH";
+  const std::string to_symbol = "USD";
 
   // Fetch prices for each exchange
   std::vector<std::pair<double, std::string>> stage1_prices;
   for (const std::string &name : stage1_exchanges) {
 
-    const std::string to_symbol = "USD";
-    const std::string response =
-        cc("data/price?fsym=BTC&tsyms=" + to_symbol + "&e=" + name);
+    const std::string response = cc("data/price?fsym=" + from_symbol +
+                                    "&tsyms=" + to_symbol + "&e=" + name);
 
     const double price =
         std::strtod(find_token(to_symbol, response).c_str(), NULL);
 
-    if (price > 8000.0)
-      if (price < 10000.0)
-        stage1_prices.push_back({price, name});
+    // Only store non-zero prices
+    if (price > 0.0)
+      stage1_prices.push_back({price, name});
   }
 
   // Print HTML header
@@ -55,14 +49,18 @@ int main() {
   std::reverse(stage1_prices.begin(), stage1_prices.end());
 
   // Print the combined prices
-  std::cout << std::fixed << std::setprecision(0);
-  std::cout << "<div>\n";
-  std::cout << "<h2>BTC-USD "
-            << 100.0 * stage1_prices.front().first / stage1_prices.back().first
-            << " %</h2>\n";
-  std::cout << "<pre>\n";
-  for (const auto &p : stage1_prices)
-    std::cout << p.first << '\t' << p.second << '\n';
+  if (!stage1_prices.empty()) {
+    std::cout << std::fixed << std::setprecision(0);
+    std::cout << "<div>\n";
+    std::cout << "<h2>" << from_symbol << "-" << to_symbol << " "
+              << 100.0 * stage1_prices.front().first /
+                     stage1_prices.back().first
+              << " %</h2>\n";
 
-  std::cout << "</pre></div>\n";
+    std::cout << "<pre>\n";
+    for (const auto &p : stage1_prices)
+      std::cout << p.first << '\t' << p.second << '\n';
+
+    std::cout << "</pre></div>\n";
+  }
 }
