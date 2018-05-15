@@ -14,10 +14,11 @@ script:
   - cat tmp/index.html
 
 deploy:
-  provider: releases
-  api_key: ${api_key}
+  provider: pages
+  github-token: ${api_key}
   file: tmp/index.html
-  skip_cleanup: trye
+  skip-cleanup: true
+  keep-history: true
   on:
-    all_branches: true
-    tags: true
+    branch: master
+    # tags: true
