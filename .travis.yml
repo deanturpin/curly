@@ -18,8 +18,9 @@ deploy:
   github-token: ${api_key}
   keep-history: true
   file-glob: true
-  file: tmp/*
   skip-cleanup: true
-  file: index.html
+  file:
+    - index.html
+    - tmp/*
   on:
     branch: master
