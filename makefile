@@ -1,12 +1,10 @@
-all: tmp index.html
+all: tmp tmp/index.html
 
 # Make working directory, all transient files are written here clean is easy
 tmp:
 	mkdir -p $@
 clean:
-	rm -f index.html
 	rm -rf tmp
-	rm -f *.gcno *.gcda
 
 tmp/%.csv: bin/%.py
 	./$< > $@
@@ -23,7 +21,7 @@ flags=-g -Werror -Wall -Wextra -pedantic -std=c++14 $(EXTRA)
 tmp/%.o: %.cpp
 	$(CXX) $(flags) -o $@ $<
 
-index.html: tmp/curly.o
+tmp/index.html: tmp/curly.o
 	$< > $@
 	@echo '<p>$(shell TZ=BST-1 date)</p>' >> $@
 
