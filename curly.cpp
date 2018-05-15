@@ -42,30 +42,27 @@ int main() {
     const double price =
         std::strtod(find_token(to_symbol, response).c_str(), NULL);
 
-    if (price > 8000.0 && price < 10000.0)
-      stage1_prices.push_back({price, name});
+    if (price > 8000.0)
+      if (price < 10000.0)
+        stage1_prices.push_back({price, name});
   }
 
   // Print HTML header
-  std::cout << std::ifstream("bin/index.html").rdbuf();
-
-  // Print the combined prices
-  std::cout << "<div>\n";
-  std::cout << "<h2>BTC-USD</h2>\n";
-  std::cout << "<pre>\n";
-  std::cout << std::fixed << std::setprecision(0);
+  std::cout << std::ifstream("template.html").rdbuf();
 
   // Sort the prices before calculating the combinations
   std::sort(stage1_prices.begin(), stage1_prices.end());
+  std::reverse(stage1_prices.begin(), stage1_prices.end());
 
-  // Calculate all combinations of prices
-  auto p = stage1_prices.cbegin();
-  auto q = stage1_prices.crbegin();
-
-  for (; p != stage1_prices.cend() && q != stage1_prices.crend(); ++p, ++q)
-    std::cout << 100.0 * q->first / p->first << " %\t" <<
-                        p->second << " " << p->first << " > " +
-                            q->second << " " << q->first << '\n';
+  // Print the combined prices
+  std::cout << std::fixed << std::setprecision(0);
+  std::cout << "<div>\n";
+  std::cout << "<h2>BTC-USD "
+            << 100.0 * stage1_prices.front().first / stage1_prices.back().first
+            << " %</h2>\n";
+  std::cout << "<pre>\n";
+  for (const auto &p : stage1_prices)
+    std::cout << p.first << '\t' << p.second << '\n';
 
   std::cout << "</pre></div>\n";
 }
