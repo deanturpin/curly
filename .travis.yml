@@ -16,6 +16,8 @@ script:
 deploy:
   provider: pages
   github-token: ${api_key}
+  file-glob: true
+  file: tmp/*
   skip-cleanup: true
   file: index.html
   on:
