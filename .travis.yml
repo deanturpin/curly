@@ -9,7 +9,7 @@ addons:
     packages: g++-6
 
 script:
-  - make CXX=g++-6 EXTRA=--coverage
+  - make TMP_DIR=tmp CXX=g++-6 EXTRA=--coverage
   - bash <(curl -s https://codecov.io/bash)
   - cat index.html
 
