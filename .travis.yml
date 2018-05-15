@@ -12,3 +12,12 @@ script:
   - make CXX=g++-6 EXTRA=--coverage
   - bash <(curl -s https://codecov.io/bash)
   - cat tmp/index.html
+
+deploy:
+  provider: releases
+  api_key: ${api_key}
+  file: tmp/index.html
+  skip_cleanup: trye
+  on:
+    all_branches: true
+    tags: true
