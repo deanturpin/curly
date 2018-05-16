@@ -1,3 +1,5 @@
+<!-- If this is readme.md it will be overwritten by the build process -->
+
 [![Build Status](https://travis-ci.org/deanturpin/curly.svg?branch=master)](https://travis-ci.org/deanturpin/curly)
 [![codecov](https://codecov.io/gh/deanturpin/curly/branch/master/graph/badge.svg)](https://codecov.io/gh/deanturpin/curly)
 
