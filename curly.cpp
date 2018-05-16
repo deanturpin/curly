@@ -41,9 +41,6 @@ int main() {
       stage1_prices.push_back({price, name});
   }
 
-  // Print HTML header
-  std::cout << std::ifstream("template.html").rdbuf();
-
   // Sort the prices before calculating the combinations
   std::sort(stage1_prices.begin(), stage1_prices.end());
   std::reverse(stage1_prices.begin(), stage1_prices.end());
@@ -51,16 +48,13 @@ int main() {
   // Print the combined prices
   if (!stage1_prices.empty()) {
     std::cout << std::fixed << std::setprecision(0);
-    std::cout << "<div>\n";
-    std::cout << "<h2>" << from_symbol << "-" << to_symbol << " "
+    std::cout << "# " << from_symbol << "-" << to_symbol << " "
               << 100.0 * stage1_prices.front().first /
-                     stage1_prices.back().first
-              << " %</h2>\n";
+                     stage1_prices.back().first << " %\n";
 
-    std::cout << "<pre>\n";
+    std::cout << "```\n";
     for (const auto &p : stage1_prices)
       std::cout << p.first << '\t' << p.second << '\n';
-
-    std::cout << "</pre></div>\n";
+    std::cout << "```\n";
   }
 }
