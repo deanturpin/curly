@@ -40,6 +40,6 @@ gitpull:
 	git pull --quiet
 
 trigger-build:
-	date > trigger.txt
+	TZ=BST date +%s > trigger.txt
 	git commit trigger.txt -m "cron"
 	git push
