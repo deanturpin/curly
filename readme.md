@@ -19,27 +19,27 @@ Prices are fetched via the [CryptoCompare API](https://min-api.cryptocompare.com
 ```
 745	BitFlip
 735	Yobit
+719	ExtStock
 718	LiveCoin
-714	ExtStock
 714	CCEX
-712	Cexio
-710	DSX
-707	Exmo
+714	Cexio
+708	Exmo
+707	Coinbase
+707	HitBTC
 707	Bitlish
-706	Coinbase
-706	Coinroom
-705	Bitstamp
+706	BitTrex
+706	Bitstamp
+706	Gemini
 705	Lykke
-705	HitBTC
 705	Bitfinex
-705	Gemini
-704	Coincap
+705	Coincap
+704	Kraken
 704	Poloniex
-703	Kraken
-703	BitTrex
+700	DSX
 700	Quoine
 695	Gatecoin
+691	Coinroom
 690	BitBay
 683	WavesDEX
 ```
-Wed 16 May 12:15:08 BST 2018
+Generated Wed 16 May 12:26:39 BST 2018

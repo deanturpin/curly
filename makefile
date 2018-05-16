@@ -20,7 +20,7 @@ generate: tmp/results.md
 
 tmp/results.md: tmp/curly.o
 	$< > $@
-	@echo $(shell TZ=BST-1 date) >> $@
+	@echo Generated $(shell TZ=BST-1 date) >> $@
 	cat template.md $@ > readme.md
 
 format:
