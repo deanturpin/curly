@@ -7,7 +7,7 @@
 #include <vector>
 #include <fstream>
 
-std::string curly(const std::string url, const bool use_network = true) {
+std::string curly(const std::string &url, const bool use_network = true) {
 
   // Known errors
   const std::vector<std::pair<unsigned int, std::string>> errors {
@@ -45,7 +45,7 @@ std::string curly(const std::string url, const bool use_network = true) {
 }
 
 // Search for a JSON key/value pair
-std::string find_token(const std::string &token, const std::string s) noexcept {
+std::string find_token(const std::string &token, const std::string &s) noexcept {
 
   std::string token_value = "";
 

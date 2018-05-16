@@ -50,7 +50,8 @@ int main() {
     std::cout << std::fixed << std::setprecision(0);
     std::cout << "# " << from_symbol << "-" << to_symbol << " "
               << 100.0 * stage1_prices.front().first /
-                     stage1_prices.back().first << " %\n";
+                     stage1_prices.back().first
+              << " %\n";
 
     std::cout << "```\n";
     for (const auto &p : stage1_prices)
