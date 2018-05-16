@@ -13,7 +13,7 @@ script:
   - bash <(curl -s https://codecov.io/bash)
   - cat index.html
 
-# before_deploy:
+before_deploy: rm -f .gitignore
 
 deploy:
   provider: pages
