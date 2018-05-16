@@ -13,31 +13,3 @@ The following info is generated periodically using prices from the
 [CryptoCompare API](https://min-api.cryptocompare.com/). See
 [references](references.md).
 
-# ETH-USD 109 %
-```
-745	BitFlip
-735	Yobit
-719	ExtStock
-718	LiveCoin
-714	CCEX
-714	Cexio
-708	Exmo
-707	Coinbase
-707	HitBTC
-707	Bitlish
-706	BitTrex
-706	Bitstamp
-706	Gemini
-705	Lykke
-705	Bitfinex
-705	Coincap
-704	Kraken
-704	Poloniex
-700	DSX
-700	Quoine
-695	Gatecoin
-691	Coinroom
-690	BitBay
-683	WavesDEX
-```
-Generated Wed 16 May 12:26:39 BST 2018
