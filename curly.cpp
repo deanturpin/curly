@@ -17,9 +17,9 @@ int main() {
                       : ""));
   };
 
+  // Read all exchange names from a text file
   const auto get_exchanges = []() {
     std::ifstream in("exchanges.txt");
-
     std::vector<std::string> e;
     std::string name;
     while (in >> name)
@@ -28,11 +28,11 @@ int main() {
     return e;
   };
 
-  // Exchanges
+  // Report exchange count
   const std::vector<std::string> &stage1_exchanges = get_exchanges();
+  std::cout << "# " << stage1_exchanges.size() << " exchanges\n";
 
-  std::cout << "Using " << stage1_exchanges.size() << " exchanges.\n";
-
+  // Fetch prices for each currency
   for (const auto &from_symbol :
        std::vector<std::string>({"ETH", "BTC", "BCH", "LTC"})) {
 
@@ -47,9 +47,6 @@ int main() {
 
       const double price =
           std::strtod(find_token(to_symbol, response).c_str(), NULL);
-
-      std::cout << "<!-- " << from_symbol << " " << to_symbol << " " << price
-                << " " << name << " -->\n";
 
       // Only store non-zero prices
       if (price > 0.0)
@@ -72,7 +69,7 @@ int main() {
     // Print the combined prices
     if (!stage1_prices.empty()) {
       std::cout << std::fixed << std::setprecision(0);
-      std::cout << "# " << from_symbol << "-" << to_symbol << " " << average
+      std::cout << "## " << from_symbol << "-" << to_symbol << " " << average
                 << '\n';
       std::cout << "```\n";
       for (const auto &p : stage1_prices)

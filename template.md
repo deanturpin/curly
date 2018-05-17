@@ -15,3 +15,4 @@ The following info is generated periodically using prices from the
 [CryptoCompare API](https://min-api.cryptocompare.com/). See
 [references](references.md).
 
+---
