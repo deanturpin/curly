@@ -6,11 +6,9 @@
 Exploring the price differential between crypto currency exchanges. Website
 build, code coverage and deployment to GitHub Pages managed in Travis CI. Also
 an experimental header-only library providing minimal network connectivity and
-JSON handling in C++ thereby removing the common dependency on Python. See the
+JSON handling in C++ thereby removing the common dependency on Python. See
 [details](details.md).
 
 The following info is generated periodically using prices from the
-[CryptoCompare API](https://min-api.cryptocompare.com/). See
-[references](references.md).
-
+[CryptoCompare API](https://min-api.cryptocompare.com/).
 ---
