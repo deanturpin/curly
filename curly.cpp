@@ -1,6 +1,7 @@
 #include "curly.h"
 #include <iomanip>
 #include <iostream>
+#include <numeric>
 #include <iterator>
 
 int main() {
@@ -17,10 +18,118 @@ int main() {
 
   // Exchanges
   const std::vector<std::string> stage1_exchanges{
-      "HitBTC",   "Bitfinex", "Cexio",    "Quoine",  "ExtStock", "BitFlip",
-      "Coinbase", "Gatecoin", "Lykke",    "BitTrex", "Bitstamp", "Coinroom",
-      "LiveCoin", "Kraken",   "Exmo",     "DSX",     "Bitlish",  "Gemini",
-      "CCEX",     "Coincap",  "Poloniex", "BitBay",  "Yobit",    "WavesDEX",
+    "OKEX",
+      "CCEX",
+      "Coinone",
+      "btcXchange",
+      "Coinroom",
+      "BitZ",
+      "Bitstamp",
+      "Gemini",
+      "Abucoins",
+      "ViaBTC",
+      "CoinEx",
+      "DSX",
+      "Exmo",
+      "Graviex",
+      "Cryptsy",
+      "CCEDK",
+      "MtGox",
+      "CoinDeal",
+      "Braziliex",
+      "BTCE",
+      "Coinse",
+      "BitGrail",
+      "CCCAGG",
+      "BitSquare",
+      "Vaultoro",
+      "LocalBitcoins",
+      "Buda",
+      "Jubi",
+      "LAToken",
+      "Surbitcoin",
+      "Gateio",
+      "Foxbit",
+      "BTCTurk",
+      "Yacuna",
+      "HitBTC",
+      "Poloniex",
+      "EthexIndia",
+      "Unocoin",
+      "TuxExchange",
+      "TokenStore",
+      "Coincheck",
+      "Upbit",
+      "bitFlyer",
+      "Coinsetter",
+      "BitMart",
+      "Huobi",
+      "CHBTC",
+      "Yunbi",
+      "MercadoBitcoin",
+      "TheRockTrading",
+      "Yobit",
+      "BTC38",
+      "TradeSatoshi",
+      "Remitano",
+      "WavesDEX",
+      "Quoine",
+      "LakeBTC",
+      "MonetaGo",
+      "BitBank",
+      "Bithumb",
+      "Coinnest",
+      "BitTrex",
+      "CoinsBank",
+      "Liqui",
+      "Velox",
+      "Paymium",
+      "BTCChina",
+      "OKCoin",
+      "Luno",
+      "Kraken",
+      "Lykke",
+      "Bitlish",
+      "EXX",
+      "BTCXIndia",
+      "BitBay",
+      "Coinbase",
+      "QuadrigaCX",
+      "HuobiPro",
+      "BitFlip",
+      "AidosMarket",
+      "Neraex",
+      "TrustDEX",
+      "BTCMarkets",
+      "LiveCoin",
+      "Cryptopia",
+      "Coincap",
+      "ExtStock",
+      "Bitso",
+      "Binance",
+      "bitFlyerFX",
+      "Korbit",
+      "Gatecoin",
+      "EtherDelta",
+      "Bitfinex",
+      "Cexio",
+      "CoinCorner",
+      "Ethfinex",
+      "BTER",
+      "Tidex",
+      "Novaexchange",
+      "Zaif",
+      "BXinth",
+      "itBit",
+      "ChileBit",
+      "VBTC",
+      "CryptoX",
+      "Coinfloor",
+      "IDEX",
+      "BitMarket",
+      "Bleutrade",
+      "Kucoin",
+      "Bit2C",
   };
 
   const std::string from_symbol = "ETH";
@@ -36,6 +145,8 @@ int main() {
     const double price =
         std::strtod(find_token(to_symbol, response).c_str(), NULL);
 
+    std::cout << from_symbol << " " << to_symbol << " " << price << '\n';
+
     // Only store non-zero prices
     if (price > 0.0)
       stage1_prices.push_back({price, name});
@@ -45,14 +156,15 @@ int main() {
   std::sort(stage1_prices.begin(), stage1_prices.end());
   std::reverse(stage1_prices.begin(), stage1_prices.end());
 
+  const auto average = (stage1_prices.empty() ? 0.0 : std::accumulate(stage1_prices.cbegin(), stage1_prices.cend(),
+                                       0.0, [](double sum, const auto &p){
+                                        return sum += p.first;
+                                       }) / stage1_prices.size());
+
   // Print the combined prices
   if (!stage1_prices.empty()) {
     std::cout << std::fixed << std::setprecision(0);
-    std::cout << "# " << from_symbol << "-" << to_symbol << " "
-              << 100.0 * stage1_prices.front().first /
-                     stage1_prices.back().first
-              << " %\n";
-
+    std::cout << "# " << from_symbol << "-" << to_symbol << '\n';
     std::cout << "```\n";
     for (const auto &p : stage1_prices)
       std::cout << p.first << '\t' << p.second << '\n';
