@@ -11,4 +11,6 @@ JSON handling in C++ thereby removing the common dependency on Python. See
 
 The following info is generated periodically using prices from the
 [CryptoCompare API](https://min-api.cryptocompare.com/).
+
 ---
+
