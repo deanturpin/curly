@@ -19,7 +19,7 @@ tmp/%.o: %.cpp
 generate: tmp/results.md
 
 tmp/results.md: tmp/curly.o
-	$< > $@
+	$< | tee $@
 	@echo Generated $(shell TZ=BST-1 date) >> $@
 	cat template.md $@ > readme.md
 

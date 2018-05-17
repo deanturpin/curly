@@ -54,7 +54,8 @@ int main() {
       "Bleutrade",      "Kucoin",      "Bit2C",
   };
 
-  for (const auto &from_symbol : std::vector<std::string>({"ETH", "BTC"})) {
+  for (const auto &from_symbol :
+       std::vector<std::string>({"ETH", "BTC", "BCH", "LTC"})) {
 
     const std::string to_symbol = "USD";
 
