@@ -17,8 +17,7 @@ int main() {
                       : ""));
   };
 
-
-  const auto get_exchanges = [](){
+  const auto get_exchanges = []() {
     std::ifstream in("exchanges.txt");
 
     std::vector<std::string> e;
