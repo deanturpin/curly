@@ -6,11 +6,14 @@ addons:
   apt:
     update: true
     sources: ubuntu-toolchain-r-test
-    packages: g++-6
+    packages:
+      - g++-6
+      - cppcheck
 
 script:
   - make TMP_DIR=tmp CXX=g++-6 EXTRA=--coverage
   - bash <(curl -s https://codecov.io/bash)
+  - make lint
 
 before_deploy: rm -f .gitignore
 

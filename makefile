@@ -25,3 +25,6 @@ tmp/results.md: tmp/curly.o
 
 format:
 	clang-format -i *.cpp
+
+lint:
+	cppcheck --enable=all .
