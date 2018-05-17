@@ -3,6 +3,7 @@
 #include <iostream>
 #include <iterator>
 #include <numeric>
+#include <vector>
 
 int main() {
 
@@ -16,43 +17,22 @@ int main() {
                       : ""));
   };
 
-  // Exchanges
-  const std::vector<std::string> stage1_exchanges{
-      "OKEX",           "Coinone",     "btcXchange",
-      "Coinroom",       "BitZ",        "Bitstamp",
-      "Gemini",         "Abucoins",    "ViaBTC",
-      "CoinEx",         "DSX",         "Exmo",
-      "Graviex",        "MtGox",       "CoinDeal",
-      "Braziliex",      "Coinse",      "BitGrail",
-      "CCCAGG",         "BitSquare",   "Vaultoro",
-      "LocalBitcoins",  "Buda",        "Jubi",
-      "LAToken",        "Surbitcoin",  "Gateio",
-      "Foxbit",         "BTCTurk",     "Yacuna",
-      "HitBTC",         "Poloniex",    "EthexIndia",
-      "Unocoin",        "TuxExchange", "TokenStore",
-      "Coincheck",      "Upbit",       "bitFlyer",
-      "BitMart",        "CHBTC",       "Yunbi",
-      "MercadoBitcoin", "Yobit",       "BTC38",
-      "TradeSatoshi",   "WavesDEX",    "Quoine",
-      "LakeBTC",        "BitBank",     "Bithumb",
-      "Coinnest",       "BitTrex",     "CoinsBank",
-      "Liqui",          "Velox",       "Paymium",
-      "BTCChina",       "Luno",        "Kraken",
-      "Lykke",          "Bitlish",     "EXX",
-      "BTCXIndia",      "BitBay",      "Coinbase",
-      "QuadrigaCX",     "HuobiPro",    "BitFlip",
-      "AidosMarket",    "Neraex",      "TrustDEX",
-      "BTCMarkets",     "LiveCoin",    "Cryptopia",
-      "Coincap",        "ExtStock",    "Bitso",
-      "Binance",        "bitFlyerFX",  "Korbit",
-      "Gatecoin",       "EtherDelta",  "Bitfinex",
-      "Cexio",          "CoinCorner",  "Ethfinex",
-      "BTER",           "Tidex",       "Novaexchange",
-      "Zaif",           "BXinth",      "itBit",
-      "ChileBit",       "VBTC",        "CryptoX",
-      "Coinfloor",      "IDEX",        "BitMarket",
-      "Bleutrade",      "Kucoin",      "Bit2C",
+
+  const auto get_exchanges = [](){
+    std::ifstream in("exchanges.txt");
+
+    std::vector<std::string> e;
+    std::string name;
+    while (in >> name)
+      e.push_back(name);
+
+    return e;
   };
+
+  // Exchanges
+  const std::vector<std::string> &stage1_exchanges = get_exchanges();
+
+  std::cout << "Using " << stage1_exchanges.size() << " exchanges.\n";
 
   for (const auto &from_symbol :
        std::vector<std::string>({"ETH", "BTC", "BCH", "LTC"})) {
