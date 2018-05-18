@@ -1,3 +1,4 @@
+language: cpp
 dist: trusty
 sudo: false
 
@@ -13,8 +14,6 @@ script:
   - make TMP_DIR=tmp CXX=g++-6 EXTRA=--coverage
   - bash <(curl -s https://codecov.io/bash)
   - make lint
-
-before_deploy: rm -f .gitignore
 
 deploy:
   provider: pages
