@@ -10,8 +10,7 @@ source: tmp
 	make $(objects)
 
 CXX=clang++-4.0
-EXTRA=
-flags=-g -Werror -Wall -Wextra -pedantic -std=c++14 $(EXTRA)
+flags=-g -pedantic -pedantic-errors -std=c++14 --coverage
 
 tmp/%.o: %.cpp
 	$(CXX) $(flags) -o $@ $<

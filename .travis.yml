@@ -1,16 +1,12 @@
 language: cpp
 
-addons:
-  apt:
-    sources: ubuntu-toolchain-r-test
-    packages:
-      - g++-6
-      - cppcheck
+git:
+  depth: false
 
 script:
-  - make TMP_DIR=tmp CXX=g++-6 EXTRA=--coverage
+  - make
   - bash <(curl -s https://codecov.io/bash)
-  - make lint
+  - which cppcheck && cppcheck -j 2 --enable=all . || true
 
 deploy:
   provider: pages
@@ -18,3 +14,33 @@ deploy:
   skip-cleanup: true
   on:
     branch: master
+
+matrix:
+  include:
+    - os: linux
+      addons:
+        apt:
+          sources: ubuntu-toolchain-r-test
+          packages:
+            - g++-6
+            - cppcheck
+      env: MATRIX_EVAL="CXX=g++-6"
+
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-4.0
+          packages:
+            - clang-4.0
+            - g++-6 # installing clang alone doesn't pull in all the libraries
+            - cppcheck
+      env: MATRIX_EVAL="CXX=clang++-4.0"
+
+    - os: osx
+      osx_image: xcode8
+      env: MATRIX_EVAL="CXX=g++-7"
+
+before_install:
+    - eval "${MATRIX_EVAL}"
