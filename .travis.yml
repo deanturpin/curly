@@ -1,9 +1,7 @@
 language: cpp
-sudo: false
 
 addons:
   apt:
-    update: true
     sources: ubuntu-toolchain-r-test
     packages:
       - g++-6
