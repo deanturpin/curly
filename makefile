@@ -13,6 +13,7 @@ CXX=clang++-4.0
 flags=-g -pedantic -pedantic-errors -std=c++14 --coverage
 
 tmp/%.o: %.cpp
+	echo Using compiler $(CXX)
 	$(CXX) $(flags) -o $@ $<
 
 generate: tmp/results.md
