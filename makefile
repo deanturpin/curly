@@ -1,4 +1,7 @@
-all: tmp generate
+all: source generate tmp/results.md
+
+CXX=clong++
+flags=-g -pedantic -pedantic-errors -std=c++14 --coverage
 
 tmp:
 	mkdir -p $@
@@ -6,17 +9,11 @@ clean:
 	rm -rf tmp
 
 objects = $(patsubst %.cpp, tmp/%.o, $(wildcard *.cpp))
-source: tmp
-	make $(objects)
-
-CXX=clang++-4.0
-flags=-g -pedantic -pedantic-errors -std=c++14 --coverage
+source: tmp $(objects)
 
 tmp/%.o: %.cpp
 	echo Using compiler $(CXX)
 	$(CXX) $(flags) -o $@ $<
-
-generate: tmp/results.md
 
 tmp/results.md: tmp/curly.o
 	$< | tee $@
@@ -25,6 +22,3 @@ tmp/results.md: tmp/curly.o
 
 format:
 	clang-format -i *.cpp
-
-lint:
-	cppcheck --enable=all .
