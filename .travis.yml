@@ -38,9 +38,5 @@ matrix:
             - cppcheck
       env: MATRIX_EVAL="CXX=clang++-4.0"
 
-    - os: osx
-      osx_image: xcode8
-      env: MATRIX_EVAL="CXX=g++-6"
-
 before_install:
     - eval "${MATRIX_EVAL}"
