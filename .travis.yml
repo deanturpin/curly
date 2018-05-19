@@ -4,8 +4,9 @@ git:
   depth: false
 
 script:
-  - echo $MATRIX_EVAL
-  - make $MATRIX_EVAL
+  - make
+  - bash <(curl -s https://codecov.io/bash)
+  - which cppcheck && cppcheck -j 2 --enable=all . || true
 
 deploy:
   provider: pages
@@ -39,7 +40,7 @@ matrix:
 
     - os: osx
       osx_image: xcode8
-      env: MATRIX_EVAL="CXX=g++-7"
+      env: MATRIX_EVAL="CXX=g++-6"
 
 before_install:
     - eval "${MATRIX_EVAL}"
