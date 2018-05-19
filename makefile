@@ -1,6 +1,6 @@
 all: source tmp/results.md
 
-CXX=clang++-4.0
+CXX=clang++
 flags=-g -pedantic -pedantic-errors -std=c++14 --coverage
 
 tmp:
