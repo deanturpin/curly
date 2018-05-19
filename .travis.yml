@@ -5,10 +5,7 @@ git:
 
 script:
   - echo $MATRIX_EVAL
-  - cat makefile
-  - make
-  - bash <(curl -s https://codecov.io/bash)
-  - which cppcheck && cppcheck -j 2 --enable=all . || true
+  - make $MATRIX_EVAL
 
 deploy:
   provider: pages
