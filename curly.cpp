@@ -6,7 +6,6 @@
 #include <vector>
 
 int main() {
-
   // Construct a CryptoCompare URL: prepend the domain and append the
   // application ID
   const auto application_id = true;
@@ -35,13 +34,11 @@ int main() {
   // Fetch prices for each currency
   for (const auto &from_symbol :
        std::vector<std::string>({"BTC", "ETH", "BCH", "LTC"})) {
-
     const std::string to_symbol = "USD";
 
     // Fetch prices for each exchange
     std::vector<std::pair<double, std::string>> stage1_prices;
     for (const std::string &name : stage1_exchanges) {
-
       const std::string response = cc("data/price?fsym=" + from_symbol +
                                       "&tsyms=" + to_symbol + "&e=" + name);
 
