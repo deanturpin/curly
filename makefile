@@ -19,6 +19,3 @@ tmp/results.md: tmp/curly.o
 	$< | tee $@
 	@echo Generated $(shell TZ=BST-1 date) >> $@
 	cat template.md $@ > readme.md
-
-format:
-	clang-format -i *.cpp
