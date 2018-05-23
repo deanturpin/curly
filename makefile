@@ -7,6 +7,7 @@ tmp:
 	mkdir -p $@
 clean:
 	rm -rf tmp
+	rm -f *.gcda *.gcno
 
 objects = $(patsubst %.cpp, tmp/%.o, $(wildcard *.cpp))
 source: tmp $(objects)
@@ -17,5 +18,6 @@ tmp/%.o: %.cpp
 
 tmp/results.md: tmp/curly.o
 	$< | tee $@
-	@echo Generated $(shell TZ=BST-1 date) >> $@
-	cat template.md $@ > readme.md
+	cat template.md > readme.md
+	echo Generated $(shell TZ=BST-1 date) >> readme.md
+	cat $@ >> readme.md

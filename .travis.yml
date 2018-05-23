@@ -1,10 +1,9 @@
 language: cpp
 
-git:
-  depth: false
-
 script:
-  - make $MATRIX_EVAL
+  - make CXX=clang++-4.0 source
+  - make clean
+  - make CXX=g++-6
   - bash <(curl -s https://codecov.io/bash)
   - which cppcheck && cppcheck -j 2 --enable=all . || true
 
@@ -20,23 +19,10 @@ matrix:
     - os: linux
       addons:
         apt:
-          sources: ubuntu-toolchain-r-test
-          packages:
-            - g++-6
-            - cppcheck
-      env: MATRIX_EVAL="CXX=g++-6"
-
-    - os: linux
-      addons:
-        apt:
           sources:
             - ubuntu-toolchain-r-test
             - llvm-toolchain-trusty-4.0
           packages:
-            - clang-4.0
-            - g++-6 # installing clang alone doesn't pull in all the libraries
+            - clang++-4.0
+            - g++-6
             - cppcheck
-      env: MATRIX_EVAL="CXX=clang++-4.0"
-
-before_install:
-    - eval "${MATRIX_EVAL}"
