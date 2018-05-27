@@ -1,11 +1,11 @@
 language: cpp
 
 script:
-  - make CXX=clang++-4.0 source
+  - make CXX=clang++-5.0 source
   - make clean
-  - make CXX=g++-6
+  - make CXX=g++-7
   - bash <(curl -s https://codecov.io/bash)
-  - which cppcheck && cppcheck -j 2 --enable=all . || true
+  - cppcheck --enable=all .
 
 deploy:
   provider: pages
@@ -21,8 +21,8 @@ matrix:
         apt:
           sources:
             - ubuntu-toolchain-r-test
-            - llvm-toolchain-trusty-4.0
+            - llvm-toolchain-trusty-5.0
           packages:
-            - clang++-4.0
-            - g++-6
+            - clang++-5.0
+            - g++-7
             - cppcheck
