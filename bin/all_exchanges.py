@@ -33,8 +33,9 @@ try:
     #                 # print(name, price[to_symbol])
     #                 print("\"" + name + "\",")
 
-    for from_symbol in exchanges["Binance"]:
-        for to_symbol in exchanges["Binance"][from_symbol]:
+    name = "Coinbase"
+    for from_symbol in exchanges[name]:
+        for to_symbol in exchanges[name][from_symbol]:
             print(from_symbol, "\t", to_symbol)
 
     print(len(good_exchanges), "good exchanges")
