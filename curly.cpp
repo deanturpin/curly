@@ -33,7 +33,7 @@ int main() {
 
   // Fetch prices for each currency
   for (const auto &from_symbol :
-       std::vector<std::string>({"BTC", "ETH", "BCH", "LTC"})) {
+       std::vector<std::string>({"BTC", "ETH", "BCH", "LTC", "ETC"})) {
     const std::string to_symbol = "USD";
 
     // Fetch prices for each exchange
