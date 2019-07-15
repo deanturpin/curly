@@ -1,0 +1,5 @@
+*.swp
+*.gcda
+*.gcno
+*.gcov
+tmp
