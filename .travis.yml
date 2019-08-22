@@ -3,7 +3,7 @@ language: cpp
 script:
   - make CXX=clang++-6.0 source
   - make clean
-  - make CXX=g++-8
+  - make CXX=g++-8 results
   - cppcheck --enable=all .
   - bash <(curl -s https://codecov.io/bash)
 
