@@ -1,7 +1,10 @@
-all: source tmp/results.md
+all: source
+	
+results:
+	tmp/results.md
 
-CXX=clang++
-flags=-g -pedantic -pedantic-errors -std=c++14 --coverage
+CXX ?= clang++
+CXXFLAGS ?= -g -pedantic -pedantic-errors -std=c++14 --coverage
 
 tmp:
 	mkdir -p $@
@@ -14,7 +17,7 @@ source: tmp $(objects)
 
 tmp/%.o: %.cpp
 	echo Using compiler $(CXX)
-	$(CXX) $(flags) -o $@ $<
+	$(CXX) $(CXXFLAGS) -o $@ $<
 
 tmp/results.md: tmp/curly.o
 	$< | tee $@
